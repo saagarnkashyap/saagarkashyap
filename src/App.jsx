@@ -4,9 +4,9 @@ import HeroSection from './components/HeroSection'
 import About from './components/About'
 // import Experience from './components/Experience'
 import Skills from './components/Skills'
+import Certifications from "./components/Certifications";
 import Education from './components/Education'
 import Projects from './components/Projects'
-import Certifications from "./components/Certifications";
 import Particle from './components/Particle'
 import Footer from './components/Footer'
 import PageLoader from './components/PageLoader'
@@ -23,7 +23,7 @@ const App = () => {
           <HeroSection />
           <About />
           {/* <Experience /> */}
-          <Certifications />
+          
           <Skills />
           <Education />
           <Projects />
