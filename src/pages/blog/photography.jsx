@@ -4,17 +4,17 @@ import { useNavigate } from 'react-router-dom';
 // Remove InfiniteMenu import
 
 const photoFilenames = [
-  '2025-11-06-074519423.jpg',
-  '20250828_203906.jpg',
-  '20250828_203925.jpg',
-  '20250928_132009(1).jpg',
-  '20250928_132653(1).jpg',
-  '20251012_150246.jpg',
-  '20251106_194455.jpg',
-  '20251108_162946(1).jpg',
-  '20251109_000214.jpg',
-  'IMG-20251104-WA0067.jpg',
-  'IMG-20251104-WA0107.jpg',
+  '2025-11-06-074519423.webp',
+  '20250828_203906.webp',
+  '20250828_203925.webp',
+  '20250928_132009(1).webp',
+  '20250928_132653(1).webp',
+  '20251012_150246.webp',
+  '20251106_194455.webp',
+  '20251108_162946(1).webp',
+  '20251109_000214.webp',
+  'IMG-20251104-WA0067.webp',
+  'IMG-20251104-WA0107.webp',
 ];
 
 const placeholder = 'https://via.placeholder.com/400x300?text=Art+of+Noticing';
