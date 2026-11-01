@@ -1,0 +1,940 @@
+@media (min-width: 1500px) {
+  .hero-layout {
+    gap: 65px;
+  }
+  .hero-photo {
+    height: 495px;
+  }
+  .hero h1 {
+    font-size: 120px;
+  }
+}
+@media (max-width: 1100px) {
+  .wrap {
+    width: calc(100% - 72px);
+  }
+  .hero h1 {
+    font-size: 8.2vw;
+    letter-spacing: -2px;
+  }
+  .hero-photo {
+    height: 400px;
+    margin-left: 10px;
+  }
+  .hero-layout {
+    gap: 20px;
+  }
+  .hero-intro {
+    max-width: 360px;
+  }
+  .hero-intro p {
+    font-size: 12px;
+  }
+  .site-nav {
+    gap: 24px;
+  }
+  .writing-home-layout,
+  .running-home-layout {
+    gap: 45px;
+  }
+  .section {
+    padding-top: 65px;
+  }
+  .project-visual {
+    aspect-ratio: 1.3;
+  }
+  .gita-emblem {
+    width: 105px;
+    height: 105px;
+  }
+  .gita-emblem:after {
+    width: 70px;
+    height: 70px;
+  }
+  .gita-title {
+    font-size: 40px;
+  }
+  .gita-emblem > span {
+    font-size: 40px;
+  }
+  .semiconductor-title {
+    font-size: 30px;
+  }
+  .chip-illustration > div {
+    width: 75px;
+    height: 75px;
+  }
+  .chip-illustration span {
+    font-size: 40px;
+  }
+  .visual-semiconductor {
+    gap: 27px;
+  }
+  .case-intro {
+    flex-direction: column;
+    gap: 10px;
+  }
+  .case-links {
+    justify-content: flex-start;
+  }
+  .case-section {
+    gap: 35px;
+  }
+  .about-opening {
+    gap: 45px;
+  }
+  .about-image > img {
+    height: 440px;
+  }
+  .footer-links {
+    column-gap: 40px;
+  }
+  .running-empty {
+    gap: 45px;
+  }
+  .track-illustration {
+    height: 200px;
+  }
+  .track-illustration .track-start {
+    top: 149px;
+  }
+  .hero-photo figcaption {
+    left: 20px;
+  }
+  .hero-baseline {
+    font-size: 7px;
+  }
+  .photo-home-grid {
+    gap: 18px;
+  }
+  .photo-wide {
+    height: 220px;
+  }
+  .photo-tall {
+    height: 310px;
+  }
+  .photo-landscape {
+    height: 180px;
+  }
+  .personal-note {
+    grid-template-columns: 1fr 1.8fr auto;
+    gap: 25px;
+  }
+  .personal-note p {
+    font-size: 35px;
+  }
+}
+@media (max-width: 760px) {
+  .wrap {
+    width: calc(100% - 40px);
+  }
+  .site-header {
+    height: 80px;
+    gap: 20px;
+    position: relative;
+    flex-wrap: wrap;
+  }
+  .wordmark {
+    font-size: 21px;
+  }
+  .wordmark-surname {
+    font-size: 13px;
+  }
+  .menu-toggle {
+    display: block;
+    margin-left: auto;
+    font-size: 9px;
+    min-height: 40px;
+    padding: 8px;
+  }
+  .now-link {
+    font-size: 8px;
+    gap: 6px;
+  }
+  .now-link .arrow {
+    display: none;
+  }
+  .site-nav {
+    display: none;
+    position: absolute;
+    top: 79px;
+    left: -20px;
+    right: -20px;
+    background: var(--ink);
+    border-bottom: 1px solid var(--line);
+    z-index: 20;
+    padding: 14px 20px 23px;
+    gap: 0;
+  }
+  .site-nav.is-open {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .site-nav > a {
+    padding: 14px 0;
+    font-size: 17px;
+    border-bottom: 1px solid var(--line);
+  }
+  .nav-dot {
+    left: auto;
+    right: 6px;
+    bottom: 21px;
+    width: 4px;
+    height: 4px;
+  }
+  .hero {
+    padding-top: 30px;
+  }
+  .hero-kicker {
+    font-size: 7px;
+    letter-spacing: 1.1px;
+    gap: 12px;
+  }
+  .tiny-cross {
+    font-size: 18px;
+  }
+  .hero-layout {
+    grid-template-columns: 1fr;
+    gap: 35px;
+    padding-top: 27px;
+    padding-bottom: 28px;
+  }
+  .hero h1 {
+    font-size: clamp(55px, 11.5vw, 86px);
+    letter-spacing: -1.7px;
+    line-height: 1.03;
+    white-space: normal;
+  }
+  .hero-intro {
+    max-width: 410px;
+    margin-top: 26px;
+    gap: 17px;
+  }
+  .intro-rule {
+    width: 25px;
+  }
+  .hero-intro p {
+    font-size: 12px;
+  }
+  .hero-cta {
+    margin-left: 42px;
+    margin-top: 15px;
+    font-size: 12px;
+  }
+  .hero-photo {
+    height: 330px;
+    width: 100%;
+    margin: 0;
+  }
+  .hero-photo > img {
+    object-position: center 43%;
+  }
+  .hero-photo figcaption {
+    font-size: 7px;
+  }
+  .hero-baseline {
+    font-size: 6px;
+    letter-spacing: 0.6px;
+    gap: 15px;
+    align-items: center;
+    padding: 20px 0;
+  }
+  .hero-baseline > span {
+    max-width: 190px;
+  }
+  .hero-baseline a {
+    gap: 13px;
+    white-space: nowrap;
+  }
+  .section {
+    padding-top: 50px;
+  }
+  .chapter {
+    padding: 16px 0;
+  }
+  .chapter .eyebrow {
+    font-size: 8px;
+    gap: 12px;
+  }
+  .chapter-number {
+    font-size: 8px;
+  }
+  .chapter-aside {
+    font-size: 6px;
+    letter-spacing: 0.5px;
+    max-width: 150px;
+    text-align: right;
+  }
+  .section-heading {
+    flex-direction: column;
+    align-items: flex-start;
+    margin: 20px 0 27px;
+    gap: 18px;
+  }
+  h2 {
+    font-size: 45px;
+    letter-spacing: -0.7px;
+  }
+  .section-heading > div > p {
+    font-size: 11px;
+    line-height: 1.8;
+    margin-bottom: 4px;
+  }
+  .text-link {
+    font-size: 12px;
+  }
+  .selected-projects {
+    grid-template-columns: 1fr;
+    gap: 36px;
+  }
+  .selected-projects > .project-item + .project-item {
+    margin-top: 0;
+  }
+  .project-visual {
+    aspect-ratio: 1.5;
+  }
+  .project-caption h3 {
+    font-size: 19px;
+  }
+  .project-caption-note {
+    font-size: 7px;
+  }
+  .project-description {
+    margin-top: 14px;
+    font-size: 12px;
+  }
+  .work-strip {
+    gap: 15px;
+    margin-top: 28px;
+    padding: 20px 0;
+  }
+  .work-strip h3 {
+    font-size: 25px;
+  }
+  .work-strip > .muted {
+    display: none;
+  }
+  .work-strip > .arrow {
+    margin-left: auto;
+    width: 18px;
+  }
+  .writing-home-layout {
+    grid-template-columns: 1fr;
+    gap: 35px;
+    padding-top: 20px;
+  }
+  .journal-empty {
+    padding-left: 22px;
+  }
+  .journal-empty p {
+    font-size: 38px;
+  }
+  .existing-note {
+    margin-left: 22px;
+  }
+  .photo-home-grid {
+    grid-template-columns: 1.15fr 0.8fr;
+    gap: 14px;
+  }
+  .photo-wide {
+    height: 240px;
+  }
+  .photo-tall {
+    height: 310px;
+  }
+  .photo-landscape {
+    grid-column: 1/-1;
+    height: 180px;
+    width: 75%;
+    margin-top: -5px;
+  }
+  .photo-caption {
+    font-size: 6px;
+    gap: 20px;
+    line-height: 1.8;
+  }
+  .photo-caption > span:last-child {
+    text-align: right;
+    max-width: 150px;
+  }
+  .running-home-layout {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+  .running-art {
+    aspect-ratio: 1.8;
+  }
+  .running-disclaimer {
+    font-size: 6px;
+  }
+  .personal-note {
+    margin-top: 65px;
+    grid-template-columns: 1fr;
+    gap: 25px;
+    padding: 30px 0 45px;
+  }
+  .personal-note p {
+    font-size: 35px;
+  }
+  .note-star {
+    display: none;
+  }
+  .site-footer {
+    padding-top: 35px;
+  }
+  .footer-main {
+    flex-direction: column;
+    gap: 35px;
+    padding-bottom: 35px;
+  }
+  .footer-invitation {
+    font-size: 65px;
+    display: inline-block;
+    padding-right: 100px;
+  }
+  .footer-invitation .arrow {
+    width: 37px;
+    height: 37px;
+  }
+  .footer-links {
+    padding: 0;
+    column-gap: 45px;
+    row-gap: 20px;
+    max-width: 450px;
+  }
+  .footer-links a {
+    font-size: 11px;
+  }
+  .footer-bottom {
+    flex-wrap: wrap;
+    gap: 16px;
+    font-size: 6px;
+    letter-spacing: 0.7px;
+  }
+  .footer-bottom > span:nth-child(2) {
+    display: none;
+  }
+  .footer-bottom > a {
+    margin-left: auto;
+    gap: 10px;
+  }
+  .page-intro {
+    padding-top: 38px;
+    padding-bottom: 40px;
+  }
+  .page-intro h1 {
+    font-size: clamp(60px, 12vw, 90px);
+    letter-spacing: -1.6px;
+    margin-top: 20px;
+  }
+  .intro-description {
+    font-size: 12px;
+    line-height: 1.9;
+    max-width: 440px;
+    margin-top: 25px;
+  }
+  .filter-bar {
+    gap: 12px 22px;
+    padding: 15px 0;
+    margin-bottom: 28px;
+  }
+  .filter-bar button {
+    font-size: 9px;
+  }
+  .filter-bar button.active:after {
+    bottom: -16px;
+  }
+  .filter-count {
+    font-size: 6px;
+  }
+  .work-grid {
+    grid-template-columns: 1fr;
+    gap: 38px;
+  }
+  .archive-footnote {
+    font-size: 7px;
+    line-height: 2;
+  }
+  .case-header {
+    padding-top: 28px;
+  }
+  .case-kicker {
+    margin-top: 25px;
+    font-size: 8px;
+  }
+  .case-header h1 {
+    font-size: clamp(55px, 12vw, 90px);
+    overflow-wrap: anywhere;
+    letter-spacing: -1.5px;
+  }
+  .case-subtitle {
+    font-size: 29px;
+    line-height: 1.2;
+    margin-top: 15px;
+  }
+  .case-intro {
+    margin-top: 25px;
+    gap: 17px;
+  }
+  .case-intro > p {
+    font-size: 12px;
+  }
+  .case-links {
+    gap: 22px;
+    flex-wrap: wrap;
+  }
+  .case-links .text-link {
+    font-size: 10px;
+  }
+  .tech-list {
+    font-size: 7px;
+    gap: 10px 15px;
+    margin: 25px 0 30px;
+  }
+  .tech-list > span + span:before {
+    margin-right: 15px;
+  }
+  .case-visual > .project-visual {
+    aspect-ratio: 1.3;
+  }
+  .case-visual .gita-emblem {
+    width: 110px;
+    height: 110px;
+  }
+  .case-visual .gita-title {
+    font-size: 50px;
+  }
+  .case-visual .gita-emblem:after {
+    width: 75px;
+    height: 75px;
+  }
+  .case-visual .gita-emblem > span {
+    font-size: 45px;
+  }
+  .case-visual .visual-subtitle {
+    font-size: 6px;
+  }
+  .case-visual .semiconductor-title {
+    font-size: 32px;
+  }
+  .case-visual .chip-illustration > div {
+    width: 85px;
+    height: 85px;
+  }
+  .case-visual .chip-illustration span {
+    font-size: 50px;
+  }
+  .case-visual .visual-wafer {
+    gap: 30px;
+  }
+  .case-visual .wafer-map {
+    width: 130px;
+    height: 130px;
+  }
+  .case-visual .wafer-title {
+    font-size: 55px;
+  }
+  .case-visual .ride-title {
+    font-size: 70px;
+  }
+  .case-visual .neuro-title {
+    font-size: 50px;
+  }
+  .case-visual-caption,
+  .case-screenshot figcaption {
+    font-size: 6px;
+  }
+  .case-screenshot {
+    margin-top: 35px;
+  }
+  .case-body {
+    margin-top: 40px;
+  }
+  .case-section {
+    grid-template-columns: 1fr;
+    gap: 18px;
+    padding: 25px 0;
+  }
+  .case-section-label {
+    gap: 17px;
+  }
+  .case-section h2 {
+    font-size: 30px;
+  }
+  .case-section > p {
+    font-size: 12px;
+    line-height: 1.95;
+    padding-left: 30px;
+  }
+  .next-project {
+    padding: 30px 0 45px;
+  }
+  .next-project > a {
+    font-size: 42px;
+    gap: 25px;
+  }
+  .next-project > a > span + span {
+    font-size: 32px;
+  }
+  .writing-empty {
+    grid-template-columns: 1fr;
+    gap: 40px;
+    padding: 35px 0;
+  }
+  .notebook-mark {
+    width: 120px;
+    height: 150px;
+    padding-top: 15px;
+  }
+  .notebook-mark > span {
+    margin-top: 19px;
+  }
+  .writing-empty h2 {
+    font-size: 43px;
+  }
+  .writing-empty p {
+    font-size: 12px;
+  }
+  .elsewhere {
+    margin-top: 40px;
+  }
+  .external-note {
+    gap: 15px;
+    padding: 23px 0;
+  }
+  .external-note > .muted {
+    display: none;
+  }
+  .external-note > .arrow {
+    margin-left: auto;
+  }
+  .external-note h3 {
+    font-size: 27px;
+  }
+  .external-note .mono {
+    font-size: 6px;
+  }
+  .writing-archive {
+    padding-bottom: 50px;
+  }
+  .photo-gallery {
+    columns: 2;
+    column-gap: 15px;
+  }
+  .photo-gallery > figure {
+    margin-bottom: 20px;
+  }
+  .photo-gallery figcaption {
+    font-size: 6px;
+    margin-top: 8px;
+    letter-spacing: 0.5px;
+  }
+  .photo-dialog {
+    padding: 15px 20px;
+  }
+  .lightbox-top {
+    font-size: 7px;
+    gap: 15px;
+  }
+  .lightbox-top button {
+    font-size: 7px;
+    gap: 10px;
+  }
+  .lightbox-bottom {
+    gap: 15px;
+    align-items: flex-start;
+  }
+  .lightbox-bottom > p {
+    font-size: 10px;
+  }
+  .lightbox-controls {
+    gap: 8px;
+  }
+  .lightbox-controls button {
+    width: 36px;
+    height: 36px;
+  }
+  .lightbox-inner {
+    gap: 12px;
+  }
+  .photo-expand {
+    opacity: 1;
+    width: 26px;
+    height: 26px;
+    right: 8px;
+    bottom: 8px;
+  }
+  .photo-expand .arrow {
+    width: 14px;
+  }
+  .about-opening {
+    grid-template-columns: 1fr;
+    gap: 35px;
+  }
+  .about-image > img {
+    height: 280px;
+    object-position: 50% 45%;
+  }
+  .about-image > .mono {
+    font-size: 6px;
+  }
+  .large-copy {
+    font-size: 38px;
+  }
+  .experience-list > article {
+    grid-template-columns: 1fr;
+    gap: 15px;
+    padding: 25px 0;
+  }
+  .experience-list h2 {
+    font-size: 35px;
+  }
+  .experience-list h3 {
+    font-size: 11px;
+  }
+  .skills-grid {
+    grid-template-columns: 1fr;
+    gap: 30px;
+    padding-top: 15px;
+  }
+  .skills-grid h2 {
+    font-size: 31px;
+  }
+  .skills-grid ul {
+    max-width: none;
+    margin-top: 18px;
+  }
+  .credentials h2 {
+    font-size: 38px;
+  }
+  .credentials li {
+    font-size: 11px;
+    line-height: 1.8;
+  }
+  .now-updated {
+    font-size: 7px;
+  }
+  .now-items > article {
+    grid-template-columns: 1fr;
+    gap: 20px;
+    padding: 30px 0;
+  }
+  .now-items h2 {
+    font-size: 34px;
+  }
+  .now-items p {
+    font-size: 12px;
+    margin-top: 16px;
+  }
+  .now-footnote {
+    flex-wrap: wrap;
+    gap: 15px;
+  }
+  .now-footnote > p {
+    font-size: 11px;
+  }
+  .now-footnote > a {
+    width: 100%;
+    margin-left: 0;
+  }
+  .running-empty {
+    grid-template-columns: 1fr;
+    gap: 45px;
+    padding: 40px 0;
+  }
+  .track-illustration {
+    width: 260px;
+    height: 175px;
+  }
+  .track-illustration > span:nth-child(5) {
+    inset: 48px;
+  }
+  .track-illustration .track-start {
+    top: 130px;
+    left: 100px;
+  }
+  .running-empty h2 {
+    font-size: 43px;
+  }
+  .running-empty p {
+    font-size: 12px;
+  }
+  .logbook-heading .mono {
+    font-size: 6px;
+  }
+  .logbook-columns {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+  .logbook-columns h3 {
+    margin-top: 12px;
+    font-size: 32px;
+  }
+  .logbook-columns p {
+    max-width: none;
+    margin-top: 10px;
+  }
+  .running-related {
+    padding-bottom: 50px;
+  }
+  .running-related h2 {
+    font-size: 42px;
+  }
+  .article-list h2 {
+    font-size: 35px;
+  }
+  .article-list p {
+    font-size: 12px;
+  }
+  .article-list > article > div:first-child {
+    font-size: 7px;
+    gap: 15px;
+  }
+  .article-header > p {
+    font-size: 16px;
+  }
+  .article-header > .mono {
+    font-size: 7px;
+    gap: 12px;
+  }
+  .prose {
+    font-size: 16px;
+    line-height: 1.9;
+  }
+  .prose h2 {
+    font-size: 34px;
+  }
+  .prose pre {
+    padding: 17px;
+    font-size: 11px;
+  }
+  .prose blockquote {
+    font-size: 25px;
+  }
+}
+@media (max-width: 380px) {
+  .wordmark-surname {
+    display: none;
+  }
+  .hero h1 {
+    font-size: 11.8vw;
+  }
+  .hero-baseline {
+    font-size: 5.5px;
+  }
+  .filter-count {
+    width: 100%;
+    margin-left: 0;
+  }
+  .filter-bar button.active:after {
+    bottom: -5px;
+  }
+  .work-strip h3 {
+    font-size: 23px;
+  }
+  .hero-photo {
+    height: 280px;
+  }
+  .photo-gallery {
+    columns: 1;
+  }
+  .chapter-aside {
+    font-size: 5px;
+  }
+  .page-intro h1 {
+    font-size: 15vw;
+  }
+  .visual-semiconductor {
+    gap: 20px;
+  }
+  .semiconductor-title {
+    font-size: 26px;
+  }
+  .footer-invitation {
+    font-size: 59px;
+  }
+  .personal-note p {
+    font-size: 32px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *:before,
+  *:after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+@media print {
+  .site-header,
+  .site-footer,
+  .skip-link,
+  .filter-bar,
+  .text-link {
+    display: none;
+  }
+  .wrap {
+    width: 100%;
+  }
+  :root {
+    background: white;
+    color: black;
+  }
+  .project-visual {
+    break-inside: avoid;
+  }
+  .section {
+    padding-top: 30px;
+  }
+}
+@media (max-width: 760px) {
+  .visual-bheeshma .visual-bottom {
+    display: none;
+  }
+  .footer-invitation {
+    font-size: clamp(48px, 15vw, 65px);
+    padding-right: 65px;
+  }
+  .track-illustration {
+    max-width: 80%;
+  }
+  .mono,
+  .eyebrow {
+    font-size: 9px;
+  }
+  .chapter-aside,
+  .footer-bottom,
+  .hero-baseline,
+  .photo-caption,
+  .photo-gallery figcaption,
+  .project-caption-note,
+  .visual-bottom,
+  .visual-subtitle,
+  .running-disclaimer,
+  .hero-kicker {
+    font-size: 8px;
+  }
+  .hero-baseline {
+    letter-spacing: 0.3px;
+  }
+  .hero-baseline > span {
+    max-width: 165px;
+  }
+  .hero-baseline a {
+    white-space: normal;
+  }
+  .project-description,
+  .section-description,
+  .about-prose > p:not(.large-copy),
+  .case-section > p,
+  .running-empty p,
+  .now-items p {
+    font-size: 13px;
+  }
+}

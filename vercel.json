@@ -1,0 +1,55 @@
+{
+  "buildCommand": "npm run build",
+  "outputDirectory": "dist",
+  "cleanUrls": true,
+  "trailingSlash": false,
+  "redirects": [
+    { "source": "/running", "destination": "/cycling", "permanent": true },
+    { "source": "/projects", "destination": "/work", "permanent": true },
+    { "source": "/blog", "destination": "/writing", "permanent": true },
+    { "source": "/blog/myblogs", "destination": "/writing", "permanent": true },
+    {
+      "source": "/blog/photography",
+      "destination": "/photos",
+      "permanent": true
+    },
+    { "source": "/skills", "destination": "/about", "permanent": true },
+    { "source": "/certifications", "destination": "/about", "permanent": true },
+    { "source": "/experience", "destination": "/about", "permanent": true }
+  ],
+  "headers": [
+    {
+      "source": "/assets/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
+    },
+    {
+      "source": "/fonts/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=86400, stale-while-revalidate=604800"
+        }
+      ]
+    },
+    {
+      "source": "/(.*)",
+      "headers": [
+        { "key": "X-Content-Type-Options", "value": "nosniff" },
+        {
+          "key": "Referrer-Policy",
+          "value": "strict-origin-when-cross-origin"
+        },
+        {
+          "key": "Permissions-Policy",
+          "value": "camera=(), microphone=(), geolocation=()"
+        },
+        { "key": "X-Frame-Options", "value": "DENY" }
+      ]
+    }
+  ]
+}

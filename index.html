@@ -2,9 +2,55 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" href="/logo.jpg" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Saagar N Kashyap</title>
+    <meta name="theme-color" content="#101113" />
+    <script>
+      try {
+        const saved = localStorage.getItem("portfolio-theme");
+        const theme =
+          saved === "light" || saved === "dark"
+            ? saved
+            : matchMedia("(prefers-color-scheme: dark)").matches
+              ? "dark"
+              : "light";
+        document.documentElement.dataset.theme = theme;
+        document.querySelector('meta[name="theme-color"]').content =
+          theme === "light" ? "#ffffff" : "#101113";
+      } catch {
+        document.documentElement.dataset.theme = "dark";
+      }
+    </script>
+    <meta name="author" content="Saagar N Kashyap" />
+    <meta property="og:site_name" content="Saagar Kashyap" />
+    <meta
+      property="og:image"
+      content="https://kashyapsaagar.vercel.app/social-preview.jpg"
+    />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta
+      property="og:image:alt"
+      content="Saagar Kashyap — About me, work experience, and project previews."
+    />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta
+      name="twitter:image"
+      content="https://kashyapsaagar.vercel.app/social-preview.jpg"
+    />
+    <link
+      rel="alternate"
+      type="application/rss+xml"
+      title="Saagar Kashyap — Writing"
+      href="/rss.xml"
+    />
+    <link
+      rel="preload"
+      href="/fonts/geist.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
   </head>
   <body>
     <div id="root"></div>

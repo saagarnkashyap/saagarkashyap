@@ -1,46 +1,95 @@
-import React from 'react';
-import { Routes, Route, Navigate } from 'react-router-dom';
-import Projects from './pages/projects';
-import Certifications from './pages/certifications';
-import Skills from './pages/skills';
-import Blog from './pages/blog';
-import HeroSection from './components/HeroSection';
-import Experience from './components/Experience';
-import About from './components/About';
-import Footer from './components/Footer';
-import Particle from './components/Particle';
-import PageLoader from './components/PageLoader';
-import MyBlogs from './pages/blog/myblogs';
-import Photography from './pages/blog/photography';
+import { Component } from "react";
+import { Routes, Route, Navigate, useLocation } from "react-router-dom";
+import SiteLayout from "./components/SiteLayout";
+import Home from "./views/Home";
+import { Work, CaseStudy } from "./views/Work";
+import { Writing, Article } from "./views/Writing";
+import Photos from "./views/Photos";
+import { About, Now, Cycling } from "./views/Personal";
+import NotFound from "./views/NotFound";
+import { getMetadata } from "./lib/metadata";
 
-const App = () => {
+class PageErrorBoundary extends Component {
+  state = { error: false };
+  static getDerivedStateFromError() {
+    return { error: true };
+  }
+  render() {
+    if (this.state.error)
+      return (
+        <div className="error-page wrap">
+          <p className="eyebrow gold">A SMALL INTERRUPTION</p>
+          <h1>Something didn’t load.</h1>
+          <p>Please try the page again.</p>
+          <a className="text-link" href={this.props.path}>
+            Reload this page ↗
+          </a>
+        </div>
+      );
+    return this.props.children;
+  }
+}
+
+export default function App() {
+  const { pathname } = useLocation();
+  const metadata = getMetadata(pathname);
   return (
     <>
-      <Particle />
-      <main style={{ position: 'relative', zIndex: 1 }}>
-        <PageLoader />
-        <div className="max-w-7xl mx-auto pt-20 px-6">
+      <title>{metadata.title}</title>
+      <meta name="description" content={metadata.description} />
+      <meta property="og:title" content={metadata.title} />
+      <meta property="og:description" content={metadata.description} />
+      <meta property="og:url" content={metadata.url} />
+      <meta
+        property="og:type"
+        content={metadata.article ? "article" : "website"}
+      />
+      <meta name="twitter:title" content={metadata.title} />
+      <meta name="twitter:description" content={metadata.description} />
+      <meta
+        name="robots"
+        content={metadata.notFound ? "noindex, follow" : "index, follow"}
+      />
+      <link rel="canonical" href={metadata.url} />
+      <SiteLayout>
+        <PageErrorBoundary key={pathname} path={pathname}>
           <Routes>
-            <Route path="/" element={
-              <>
-                <HeroSection />
-                <About />
-                <Experience />
-                <Footer />
-              </>
-            } />
-            <Route path="/projects" element={<Projects />} />
-            <Route path="/certifications" element={<Certifications />} />
-            <Route path="/skills" element={<Skills />} />
-            <Route path="/blog" element={<Blog />} />
-            <Route path="/blog/myblogs" element={<MyBlogs />} />
-            <Route path="/blog/photography" element={<Photography />} />
-            <Route path="*" element={<Navigate to="/" replace />} />
+            <Route path="/" element={<Home />} />
+            <Route path="/work" element={<Work />} />
+            <Route path="/work/:slug" element={<CaseStudy />} />
+            <Route path="/writing" element={<Writing />} />
+            <Route path="/writing/:slug" element={<Article />} />
+            <Route path="/photos" element={<Photos />} />
+            <Route path="/cycling" element={<Cycling />} />
+            <Route
+              path="/running"
+              element={<Navigate to="/cycling" replace />}
+            />
+            <Route path="/about" element={<About />} />
+            <Route path="/now" element={<Now />} />
+            <Route path="/projects" element={<Navigate to="/work" replace />} />
+            <Route path="/blog" element={<Navigate to="/writing" replace />} />
+            <Route
+              path="/blog/myblogs"
+              element={<Navigate to="/writing" replace />}
+            />
+            <Route
+              path="/blog/photography"
+              element={<Navigate to="/photos" replace />}
+            />
+            <Route path="/skills" element={<Navigate to="/about" replace />} />
+            <Route
+              path="/certifications"
+              element={<Navigate to="/about" replace />}
+            />
+            <Route
+              path="/experience"
+              element={<Navigate to="/about" replace />}
+            />
+            <Route path="*" element={<NotFound />} />
           </Routes>
-        </div>
-      </main>
+        </PageErrorBoundary>
+      </SiteLayout>
     </>
   );
-};
-
-export default App;
+}

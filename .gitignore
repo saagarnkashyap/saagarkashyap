@@ -8,6 +8,12 @@ pnpm-debug.log*
 lerna-debug.log*
 
 node_modules
+.tools/
+.build/
+test-results/
+playwright-report/
+.env
+.env.*
 dist
 dist-ssr
 *.local

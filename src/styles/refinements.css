@@ -1,0 +1,792 @@
+/* Shared presentation refinements, applied after the original responsive rules. */
+:root {
+  --display: Geist, Arial, sans-serif;
+  --wordmark-first-name: #d0b47b;
+  --wordmark-last-name: #dc6259;
+  --serif: var(--display);
+  --reading-bg: #17191b;
+  --reading-text: #e8e4d9;
+  --reading-muted: #b5b5ad;
+}
+:root[data-theme="light"] {
+  --wordmark-first-name: #a93632;
+  --wordmark-last-name: #785f32;
+  --ink: #ffffff;
+  --graphite: #f3f4f4;
+  --ivory: #101113;
+  --gold: #8a6224;
+  --sage: #386b53;
+  --muted: #101113;
+  --line: #d9ddda;
+  --reading-bg: #ffffff;
+  --reading-text: #101113;
+  --reading-muted: #101113;
+  color-scheme: light;
+}
+body {
+  background: var(--ink);
+  color: var(--ivory);
+}
+h1,
+h2,
+.large-copy,
+.footer-invitation,
+.case-subtitle,
+.next-project > a {
+  font-family: var(--display);
+  font-weight: 500;
+  font-style: normal;
+}
+h1 em,
+h2 em,
+.large-copy em,
+.footer-invitation em,
+.case-subtitle,
+.ride-title {
+  font-style: normal;
+}
+.page-intro h1 {
+  font-size: clamp(32px, 3.2vw, 44px);
+  line-height: 1.08;
+  letter-spacing: -0.055em;
+}
+.page-intro h1 em {
+  font-weight: 500;
+}
+.chapter {
+  gap: 20px;
+  padding-block: 22px;
+}
+.chapter > .eyebrow {
+  font-family: var(--sans);
+  font-size: clamp(19px, 2vw, 27px);
+  letter-spacing: -0.5px;
+  text-transform: none;
+  font-weight: 500;
+  line-height: 1.35;
+}
+.chapter-number {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 1px;
+}
+.page-intro .chapter > .eyebrow {
+  font-family: var(--mono);
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+}
+.chapter-aside {
+  flex-shrink: 0;
+}
+.home-projects-heading h2,
+.photography-heading h2 {
+  font-size: clamp(30px, 3.3vw, 48px);
+  line-height: 1.15;
+  letter-spacing: -0.04em;
+}
+.large-copy {
+  font-size: clamp(27px, 3vw, 41px);
+  line-height: 1.25;
+  letter-spacing: -0.035em;
+}
+.about-prose > p:not(.large-copy),
+.experience-list p,
+.intro-description,
+.section-description,
+.project-description {
+  font-size: 15px;
+  line-height: 1.85;
+}
+.site-nav > a {
+  font-size: 13px;
+}
+.site-header {
+  gap: 24px;
+}
+.site-nav {
+  gap: 25px;
+}
+.theme-toggle {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  color: var(--ivory);
+}
+.theme-toggle:hover {
+  border-color: var(--gold);
+  color: var(--gold);
+}
+.theme-toggle svg {
+  width: 19px;
+  height: 19px;
+}
+.theme-moon {
+  display: none;
+}
+[data-theme="light"] .theme-sun {
+  display: none;
+}
+[data-theme="light"] .theme-moon {
+  display: block;
+}
+.company-identity {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 20px;
+  margin-bottom: 14px;
+}
+.company-logo {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.company-logo-gf {
+  width: 62px;
+  height: 62px;
+  background: transparent;
+  border: 0;
+  padding: 0;
+}
+.company-logo-tiger {
+  background: transparent;
+  border: 0;
+  padding: 0;
+  width: 166px;
+  height: 62px;
+}
+.company-logo img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+.experience-list .company-name {
+  font-family: var(--display);
+  font-size: clamp(27px, 3vw, 42px);
+  font-weight: 500;
+  letter-spacing: -0.04em;
+  margin: 0;
+  line-height: 1.15;
+}
+.experience-list h3:not(.company-name) {
+  font-size: 14px;
+}
+.home-project-title {
+  font-size: 22px;
+  font-weight: 500;
+}
+.home-projects {
+  padding-bottom: 0;
+}
+.home-photography {
+  padding-bottom: 85px;
+}
+.photography-heading {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 30px;
+  margin: 28px 0 34px;
+}
+.photography-explore {
+  display: inline-flex;
+  align-items: center;
+  gap: 25px;
+  border: 1px solid var(--gold);
+  color: var(--gold);
+  padding: 17px 22px;
+  font-size: 14px;
+  font-weight: 500;
+  flex-shrink: 0;
+}
+.photography-explore:hover {
+  background: var(--gold);
+  color: var(--ink);
+}
+.photo-slider {
+  min-width: 0;
+}
+@media (min-width: 761px) {
+  .home-photography .photo-slider {
+    max-width: 960px;
+    margin-inline: auto;
+  }
+}
+.photo-slide-frame {
+  width: 100%;
+  aspect-ratio: 16/9;
+  overflow: hidden;
+  background: var(--graphite);
+  touch-action: pan-y;
+}
+.photo-slide-frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.photo-slider-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  padding-block: 18px;
+  border-bottom: 1px solid var(--line);
+}
+.photo-slider-controls > p {
+  color: var(--muted);
+  font-size: 10px;
+}
+.slider-collection {
+  margin-left: 22px;
+}
+.photo-slider-dots {
+  display: flex;
+  gap: 5px;
+}
+.photo-slider-dots button {
+  width: 28px;
+  height: 28px;
+  display: grid;
+  place-items: center;
+  padding: 9px;
+}
+.photo-slider-dots button::after {
+  content: "";
+  width: 6px;
+  height: 6px;
+  border: 1px solid var(--muted);
+  border-radius: 50%;
+}
+.photo-slider-dots button.active::after {
+  background: var(--gold);
+  border-color: var(--gold);
+}
+.photo-slider-arrows {
+  display: flex;
+  gap: 10px;
+}
+.photo-slider-arrows button {
+  width: 42px;
+  height: 42px;
+  border: 1px solid var(--line);
+  font-size: 22px;
+}
+.photo-slider-arrows button:hover {
+  color: var(--gold);
+  border-color: var(--gold);
+}
+.visual-neuroasha-screenshot {
+  background: #fff;
+}
+.visual-neuroasha-screenshot > img {
+  object-fit: contain;
+}
+.case-visual .visual-neuroasha-screenshot {
+  aspect-ratio: 982/578;
+}
+.footer-invitation {
+  font-size: clamp(40px, 4.8vw, 66px);
+  line-height: 1.12;
+  letter-spacing: -0.05em;
+}
+.photo-dialog {
+  background: var(--ink);
+  color: var(--ivory);
+}
+.photo-dialog::backdrop {
+  background: var(--ink);
+}
+.caption-pending {
+  font-size: 12px;
+  color: var(--muted);
+}
+.reading-page {
+  background: var(--reading-bg);
+  color: var(--reading-text);
+}
+.reading-page .text-link,
+.article-header > p,
+.article-header > .mono,
+.article-toc summary {
+  color: var(--reading-muted);
+}
+.prose {
+  color: var(--reading-text);
+}
+.prose h2,
+.prose h3 {
+  color: var(--reading-text);
+  font-weight: 500;
+}
+.prose a {
+  color: var(--gold);
+}
+.prose blockquote {
+  color: var(--reading-muted);
+}
+.article-header .article-tags {
+  color: var(--gold);
+}
+[data-theme="light"] .project-visual .visual-bottom {
+  color: #b5bbb6;
+}
+[data-theme="light"] .visual-semiconductor,
+[data-theme="light"] .visual-wafer,
+[data-theme="light"] .visual-neuro {
+  color: #e8e4d9;
+}
+[data-theme="light"] .photo-label {
+  color: #fff;
+}
+@media (max-width: 1100px) {
+  .site-header {
+    gap: 16px;
+  }
+  .site-nav {
+    gap: 17px;
+  }
+  .now-link .arrow {
+    display: none;
+  }
+  .site-nav > a {
+    font-size: 12px;
+  }
+}
+@media (max-width: 760px) {
+  .site-header {
+    gap: 12px;
+  }
+  .theme-toggle {
+    width: 36px;
+    height: 36px;
+  }
+  .site-nav > a {
+    font-size: 17px;
+  }
+  .page-intro h1 {
+    font-size: clamp(30px, 7.5vw, 36px);
+  }
+  .chapter > .eyebrow {
+    font-size: 20px;
+  }
+  .chapter-aside {
+    font-size: 7px;
+    max-width: 115px;
+  }
+  .page-intro .chapter > .eyebrow {
+    font-size: 10px;
+  }
+  .chapter-number {
+    font-size: 10px;
+  }
+  .about-prose > p:not(.large-copy),
+  .experience-list p,
+  .intro-description,
+  .section-description,
+  .project-description {
+    font-size: 14px;
+  }
+  .company-identity {
+    gap: 14px;
+  }
+  .company-logo-gf {
+    width: 52px;
+    height: 52px;
+  }
+  .company-logo-tiger {
+    width: 145px;
+    height: 52px;
+  }
+  .photography-heading {
+    align-items: stretch;
+    flex-direction: column;
+    gap: 25px;
+  }
+  .photography-explore {
+    justify-content: space-between;
+  }
+  .home-photography {
+    padding-bottom: 50px;
+  }
+  .photo-slider-controls {
+    flex-wrap: wrap;
+    gap: 14px;
+  }
+  .slider-collection {
+    display: none;
+  }
+  .photo-slider-dots {
+    gap: 0;
+  }
+  .photo-slider-dots button {
+    width: 22px;
+  }
+  .photo-slider-arrows {
+    gap: 7px;
+  }
+  .photo-slider-arrows button {
+    width: 36px;
+    height: 36px;
+  }
+  .footer-invitation {
+    font-size: clamp(38px, 10.5vw, 54px);
+  }
+  .experience-list h3:not(.company-name) {
+    font-size: 13px;
+  }
+}
+.visual-semiconductor .chip-illustration small {
+  color: #a8c1b0;
+}
+.prose :not(pre) > code {
+  background: var(--graphite);
+  color: var(--ivory);
+}
+.visual-semiconductor .semiconductor-title em {
+  color: #a8c1b0;
+}
+/* Page identity and navigation hierarchy. */
+.wordmark {
+  font-family: var(--sans);
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: -0.7px;
+  white-space: nowrap;
+}
+.wordmark-first-name {
+  color: var(--wordmark-first-name);
+}
+.wordmark-last-name {
+  color: var(--wordmark-last-name);
+}
+.menu-toggle,
+.now-link {
+  font-family: var(--sans);
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: 0;
+  text-transform: none;
+  line-height: 1.3;
+}
+.now-link {
+  gap: 8px;
+}
+.page-title-row {
+  display: flex;
+  align-items: baseline;
+  gap: 20px;
+}
+.page-number {
+  color: var(--gold);
+  font-size: 11px;
+  flex-shrink: 0;
+}
+.page-intro .page-title-row h1 {
+  font-size: clamp(32px, 3.2vw, 44px);
+  font-weight: 650;
+  line-height: 1.12;
+  letter-spacing: -0.055em;
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+.page-intro .page-tagline {
+  font-size: 17px;
+  line-height: 1.2;
+  font-weight: 450;
+  letter-spacing: -0.035em;
+  margin-top: 28px;
+}
+.page-intro .page-tagline em {
+  font-style: normal;
+  font-weight: 450;
+  color: var(--muted);
+}
+.company-logo img {
+  color-scheme: inherit;
+}
+.cycling-illustration {
+  width: 100%;
+  max-width: 350px;
+  margin-inline: auto;
+}
+.cycling-illustration svg {
+  display: block;
+  width: 100%;
+  fill: none;
+  stroke: var(--sage);
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.cycling-illustration .cycle-frame {
+  stroke: var(--gold);
+  stroke-width: 3;
+}
+@media (min-width: 761px) {
+  .experience-list > article {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 18px;
+  }
+  .experience-list > article > div {
+    max-width: 850px;
+  }
+  .experience-list .company-name {
+    font-size: 36px;
+  }
+  .chapter > h2.eyebrow {
+    font-size: 34px;
+    font-weight: 600;
+  }
+}
+@media (max-width: 760px) {
+  .site-header {
+    gap: 8px;
+  }
+  .wordmark {
+    font-size: 18px;
+    letter-spacing: -0.6px;
+  }
+  .menu-toggle,
+  .now-link {
+    font-size: 14px;
+  }
+  .page-title-row {
+    gap: 13px;
+  }
+  .page-intro .page-title-row h1 {
+    font-size: clamp(30px, 7.5vw, 36px);
+  }
+  .page-intro .page-tagline {
+    font-size: 16px;
+    margin-top: 23px;
+  }
+  .page-number {
+    font-size: 10px;
+  }
+}
+/* Section labels remain more prominent than their supporting lines. */
+.home-projects .chapter > h2.eyebrow,
+.home-photography .chapter > h2.eyebrow {
+  font-size: clamp(26px, 3vw, 42px);
+  font-weight: 600;
+}
+.home-projects-heading h2,
+.photography-heading h2 {
+  font-size: clamp(22px, 2.3vw, 32px);
+  font-weight: 450;
+}
+.project-open {
+  color: #e8e4d9;
+}
+@media (min-width: 761px) {
+  #experience .chapter > h2.eyebrow {
+    font-size: 40px;
+  }
+}
+/* Restrained editorial openings; existing palette and interface tokens stay intact. */
+.page-intro {
+  padding-top: 36px;
+  padding-bottom: 30px;
+}
+.page-intro-heading {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 28px;
+  min-width: 0;
+}
+.page-intro .page-title-row {
+  gap: 16px;
+  min-width: 0;
+}
+.page-intro .page-title-row h1 {
+  font-size: clamp(40px, 3.2vw, 44px);
+  line-height: 1.16;
+  letter-spacing: -0.04em;
+  font-weight: 600;
+  overflow-wrap: normal;
+}
+.page-intro-actions {
+  flex-shrink: 0;
+}
+.page-intro-copy {
+  margin-top: 16px;
+  max-width: 680px;
+}
+.page-intro .page-tagline {
+  font-size: 17px;
+  line-height: 1.6;
+  letter-spacing: 0;
+  font-weight: 400;
+  margin: 0;
+  color: var(--muted);
+}
+.page-intro .intro-description {
+  font-size: 15px;
+  line-height: 1.8;
+  max-width: 680px;
+  margin: 0;
+}
+.page-intro-copy > p + p {
+  margin-top: 10px;
+}
+.page-intro-archive {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 0.85fr);
+  column-gap: 70px;
+  align-items: start;
+  padding-top: 40px;
+  padding-bottom: 32px;
+}
+.page-intro-archive .page-intro-copy {
+  margin: 0;
+}
+.page-intro-writing .page-intro-copy {
+  max-width: 640px;
+  margin-left: 35px;
+}
+.page-intro-writing .rss-link {
+  margin: 0;
+  padding-block: 8px;
+}
+.page-intro-gallery {
+  padding-top: 30px;
+  padding-bottom: 24px;
+}
+.page-intro-gallery .page-intro-copy {
+  max-width: 700px;
+  margin-left: 35px;
+}
+.page-intro-logbook .page-intro-copy {
+  margin-left: 35px;
+}
+.page-intro-profile {
+  padding-bottom: 24px;
+}
+.home-profile .page-intro-home {
+  padding-top: 34px;
+  padding-bottom: 26px;
+}
+.home-profile .page-intro-home .page-title-row h1 {
+  font-size: clamp(44px, 3.4vw, 48px);
+  line-height: 1.2;
+  font-weight: 550;
+  letter-spacing: -0.04em;
+}
+.page-intro-home .home-name {
+  color: var(--wordmark-first-name);
+  white-space: nowrap;
+}
+.home-profile .about-opening,
+.page-intro-profile + .about-opening {
+  padding-top: 0;
+}
+.home-profile .about-image,
+.page-intro-profile + .about-opening .about-image {
+  margin-top: 0;
+}
+.about-opening .large-copy {
+  font-size: 26px;
+  line-height: 1.35;
+  letter-spacing: -0.025em;
+  margin-bottom: 18px;
+}
+.writing-empty {
+  padding-block: 36px;
+  gap: 54px;
+}
+.writing-empty h2 {
+  font-size: 32px;
+  line-height: 1.2;
+  margin: 16px 0;
+}
+.running-empty {
+  padding-block: 40px;
+  gap: 60px;
+}
+.running-empty h2 {
+  font-size: 30px;
+  line-height: 1.2;
+  margin-top: 14px;
+}
+.running-empty p {
+  margin-top: 18px;
+}
+.running-empty .cycling-illustration {
+  max-width: 270px;
+}
+.running-related h2 {
+  font-size: 32px;
+  line-height: 1.25;
+}
+.page-intro-actions .now-updated {
+  margin: 0;
+}
+@media (max-width: 760px) {
+  .page-intro {
+    padding-top: 28px;
+    padding-bottom: 24px;
+  }
+  .page-intro-heading {
+    align-items: flex-start;
+    gap: 18px;
+    flex-wrap: wrap;
+  }
+  .page-intro .page-title-row {
+    gap: 12px;
+  }
+  .page-intro .page-title-row h1 {
+    font-size: clamp(30px, 7.7vw, 36px);
+    line-height: 1.2;
+  }
+  .page-intro .intro-description {
+    font-size: 14px;
+    line-height: 1.8;
+  }
+  .page-intro .page-tagline {
+    font-size: 16px;
+  }
+  .page-intro-archive {
+    grid-template-columns: minmax(0, 1fr);
+    row-gap: 16px;
+  }
+  .page-intro-writing .page-intro-copy,
+  .page-intro-gallery .page-intro-copy,
+  .page-intro-logbook .page-intro-copy {
+    margin-left: 0;
+  }
+  .home-profile .page-intro-home {
+    padding-top: 26px;
+    padding-bottom: 22px;
+  }
+  .home-profile .page-intro-home .page-title-row h1 {
+    font-size: clamp(28px, 7.8vw, 34px);
+  }
+  .about-opening .large-copy {
+    font-size: 24px;
+  }
+  .writing-empty {
+    gap: 26px;
+    padding-block: 28px;
+  }
+  .writing-empty h2 {
+    font-size: 28px;
+  }
+  .running-empty {
+    gap: 28px;
+    padding-block: 30px;
+  }
+  .running-empty h2 {
+    font-size: 26px;
+  }
+  .running-related h2 {
+    font-size: 28px;
+  }
+}

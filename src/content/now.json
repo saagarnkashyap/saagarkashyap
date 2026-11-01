@@ -1,0 +1,30 @@
+{
+  "updated": "2026-11-01",
+  "intro": "A small, changeable page about the things taking up space in my work and life.",
+  "items": [
+    {
+      "label": "Working on",
+      "title": "Planning systems & useful automation",
+      "text": "Python, Power BI, and reporting workflows for supply chain planning at GlobalFoundries. Making recurring analysis easier to run and easier to understand."
+    },
+    {
+      "label": "Building",
+      "title": "Tools that follow a question",
+      "text": "Semiconductor analysis, a wafer-handling simulator, and Bheeshma. Different subjects, with a shared interest in making information easier to explore.",
+      "link": "/work",
+      "linkLabel": "Explore the projects"
+    },
+    {
+      "label": "Outside the screen",
+      "title": "Photography, poetry & cycling",
+      "text": "A place for the interests that don't fit neatly into a project description. A few of my photographs are already in the archive.",
+      "link": "/photos",
+      "linkLabel": "Open the photo archive"
+    },
+    {
+      "label": "Reading & learning",
+      "title": "Room for the next note",
+      "text": "No current reading list or learning notes shared yet. This corner will grow with them."
+    }
+  ]
+}
