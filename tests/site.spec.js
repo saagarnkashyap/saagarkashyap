@@ -13,6 +13,9 @@ const paths = [
   "/work/wafex",
   "/work/ridezilla",
   "/work/neuroasha",
+  "/work/falconet",
+  "/work/claudetrippy",
+  "/work/drishtinet",
   "/writing",
   "/photos",
   "/about",
@@ -50,7 +53,7 @@ test("all routes render, hydrate, load assets, and fit the viewport", async ({
   expect(errors).toEqual([]);
 });
 
-test("Home previews open the work archive, which contains the six resume projects", async ({
+test("Home previews open the nine-project work archive in its editorial order", async ({
   page,
 }) => {
   await page.goto("/");
@@ -77,7 +80,9 @@ test("Home previews open the work archive, which contains the six resume project
   for (const preview of await page.locator(".home-project-preview").all()) {
     await expect(preview).toHaveAttribute("href", "/work");
   }
-  await expect(page.locator(".home-projects-heading .all-work-button")).toHaveText("View all work");
+  await expect(
+    page.locator(".home-projects-heading .all-work-button"),
+  ).toHaveText("View all work");
   await expect(
     page.locator(
       ".writing-home, .photo-home, .running-home, .work-strip, .project-description",
@@ -85,7 +90,19 @@ test("Home previews open the work archive, which contains the six resume project
   ).toHaveCount(0);
   await page.locator(".home-project-preview").first().click();
   await expect(page).toHaveURL(/\/work$/);
-  await expect(page.locator(".project-item")).toHaveCount(6);
+  await expect(page.locator(".project-item")).toHaveCount(9);
+  await expect(page.locator(".filter-count")).toHaveText("09 PROJECTS");
+  expect(await page.locator(".project-index").allTextContents()).toEqual([
+    "01",
+    "02",
+    "03",
+    "04",
+    "05",
+    "06",
+    "07",
+    "08",
+    "09",
+  ]);
   await expect(page.getByRole("heading", { level: 1 })).toHaveText(
     "Work archive",
   );
@@ -101,13 +118,45 @@ test("Home previews open the work archive, which contains the six resume project
   expect(await page.locator(".project-caption h3").allTextContents()).toEqual([
     "Bheeshma",
     "ARTI-E",
-    "Semiconductor insights",
-    "Wafex",
-    "RideZilla",
     "NeuroAsha",
+    "WAFERX",
+    "Falconet",
+    "claudetrippy",
+    "DrishtiNet",
+    "Semiconductor insights",
+    "RideZilla",
   ]);
-  await page.getByRole("button", { name: "Engineering", exact: true }).click();
-  await expect(page.locator(".project-item")).toHaveCount(3);
+  for (const [filter, names] of [
+    ["Web & personal", ["Bheeshma", "NeuroAsha", "claudetrippy", "RideZilla"]],
+    [
+      "Data & intelligence",
+      [
+        "NeuroAsha",
+        "WAFERX",
+        "Falconet",
+        "DrishtiNet",
+        "Semiconductor insights",
+      ],
+    ],
+    [
+      "Engineering",
+      [
+        "ARTI-E",
+        "WAFERX",
+        "Falconet",
+        "claudetrippy",
+        "Semiconductor insights",
+      ],
+    ],
+  ]) {
+    await page.getByRole("button", { name: filter, exact: true }).click();
+    expect(await page.locator(".project-caption h3").allTextContents()).toEqual(
+      names,
+    );
+    await expect(page.locator(".filter-count")).toHaveText(
+      `${String(names.length).padStart(2, "0")} PROJECTS`,
+    );
+  }
   await page.getByRole("button", { name: "All work", exact: true }).click();
   await page
     .getByRole("link", { name: "Explore Bheeshma", exact: true })
@@ -119,6 +168,79 @@ test("Home previews open the work archive, which contains the six resume project
     "src",
     "/projects/WAFER-X.png",
   );
+});
+
+test("new case studies use real media, correctly labeled links, and motion controls", async ({
+  page,
+}) => {
+  await page.goto("/work/falconet");
+  await expect(
+    page.getByRole("link", { name: "Watch the video on LinkedIn" }),
+  ).toHaveAttribute("href", "https://lnkd.in/p/gTTDEmjH");
+  await expect(
+    page.getByRole("link", { name: "Source on GitHub" }),
+  ).toHaveAttribute("href", "https://github.com/saagarnkashyap/Falconet");
+  await expect(
+    page.getByRole("link", { name: "Open live project" }),
+  ).toHaveCount(0);
+  await expect(page.locator(".case-visual img")).toHaveAttribute(
+    "src",
+    "/projects/falconet.gif",
+  );
+
+  await page.goto("/work/drishtinet");
+  await expect(
+    page.getByRole("link", { name: "Read the research notebook" }),
+  ).toHaveAttribute(
+    "href",
+    "https://github.com/saagarnkashyap/DrishtiNet/blob/main/06thMar26_draft1.ipynb",
+  );
+  const scientificImage = page.locator(".case-visual img");
+  await expect(scientificImage).toHaveAttribute(
+    "src",
+    "/projects/drishtinet.webp",
+  );
+  expect(
+    await scientificImage.evaluate((img) => getComputedStyle(img).objectFit),
+  ).toBe("contain");
+  await expect(scientificImage).toHaveAttribute("width", "1234");
+  await expect(scientificImage).toHaveAttribute("height", "413");
+
+  for (const [slug, name] of [
+    ["falconet", "Falconet"],
+    ["claudetrippy", "claudetrippy"],
+  ]) {
+    for (const route of ["/work", `/work/${slug}`]) {
+      await page.goto(route);
+      const preview =
+        route === "/work"
+          ? page.locator(".project-item").filter({
+              has: page.getByRole("heading", {
+                name,
+                exact: true,
+              }),
+            })
+          : page.locator(".case-visual");
+      const image = preview.locator("img");
+      await expect(image).toHaveAttribute("src", `/projects/${slug}.gif`);
+      await preview.getByRole("button", { name: "Pause animation" }).click();
+      await expect(image).toHaveAttribute(
+        "src",
+        `/projects/${slug}-poster.webp`,
+      );
+      await preview.getByRole("button", { name: "Play animation" }).click();
+      await expect(image).toHaveAttribute("src", `/projects/${slug}.gif`);
+      await expect(page).toHaveURL(new RegExp(`${route}$`));
+      await page.emulateMedia({ reducedMotion: "reduce" });
+      await expect
+        .poll(() => image.evaluate((img) => img.currentSrc))
+        .toContain(`${slug}-poster.webp`);
+      await expect(
+        preview.getByRole("button", { name: "Pause animation" }),
+      ).toBeHidden();
+      await page.emulateMedia({ reducedMotion: "no-preference" });
+    }
+  }
 });
 
 test("small phones and intermediate widths remain usable", async ({

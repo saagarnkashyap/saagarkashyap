@@ -1,5 +1,28 @@
 // Real project captures and supplied project output, kept separate from illustrations.
 export const projectImages = {
+  falconet: {
+    src: "/projects/falconet.gif",
+    poster: "/projects/falconet-poster.webp",
+    alt: "Falconet aerial traffic demonstration showing vehicles on roads at night with tracking overlays and traffic visualization.",
+    width: 400,
+    height: 225,
+    caption: "AERIAL TRAFFIC VISUALIZATION / ANIMATED PROJECT DEMONSTRATION",
+  },
+  claudetrippy: {
+    src: "/projects/claudetrippy.gif",
+    poster: "/projects/claudetrippy-poster.webp",
+    alt: "Code-generated animation with text, tokens, probability graphics, and a terminal sequence exploring the perspective of a language model.",
+    width: 800,
+    height: 464,
+    caption: "PYTHON + FFMPEG / ANIMATED PROJECT DEMONSTRATION",
+  },
+  drishtinet: {
+    src: "/projects/drishtinet.webp",
+    alt: "DrishtiNet figure showing the original retinal image, Grad-CAM heatmap, overlay, and Model Attention color scale in their original arrangement.",
+    width: 1234,
+    height: 413,
+    caption: "RETINAL IMAGE + GRAD-CAM / ORIGINAL SCIENTIFIC FIGURE",
+  },
   neuroasha: {
     src: "/projects/neuroasha.png",
     alt: "NeuroAsha research output showing original MRI images alongside Grad-CAM overlays for AD, CN, and MCI examples.",

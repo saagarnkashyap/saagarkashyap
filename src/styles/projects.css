@@ -565,3 +565,51 @@
 .case-visual .visual-wafex-screenshot {
   aspect-ratio: 1537/1198;
 }
+
+/* Keep the new demonstrations complete within the existing cover proportions. */
+.visual-falconet-screenshot > img,
+.visual-drishtinet-screenshot > img,
+.visual-screenshot > picture > img {
+  object-fit: contain;
+  object-position: center;
+}
+.visual-drishtinet-screenshot {
+  background: white;
+}
+.visual-screenshot > picture,
+.visual-screenshot > picture > img {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.case-visual .visual-screenshot.visual-falconet-screenshot {
+  aspect-ratio: 16/9;
+}
+.case-visual .visual-screenshot.visual-drishtinet-screenshot {
+  aspect-ratio: 1234/413;
+}
+.case-visual .visual-screenshot.visual-claudetrippy-screenshot {
+  aspect-ratio: 800/464;
+}
+.project-preview {
+  position: relative;
+}
+.project-animation-control {
+  position: absolute;
+  bottom: 17px;
+  left: 17px;
+  border: 1px solid var(--line);
+  background: var(--ink);
+  color: var(--ivory);
+  padding: 9px 12px;
+  font-size: 12px;
+}
+.project-animation-control:hover {
+  color: var(--gold);
+  border-color: var(--gold);
+}
+@media (prefers-reduced-motion: reduce) {
+  .project-animation-control {
+    display: none;
+  }
+}

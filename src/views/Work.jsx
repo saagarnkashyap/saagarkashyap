@@ -3,6 +3,7 @@ import { useState } from "react";
 import {
   Chapter,
   PageIntro,
+  ProjectAnimationControl,
   ProjectItem,
   ProjectVisual,
   TextLink,
@@ -20,9 +21,21 @@ export function Work() {
     "Engineering",
   ];
   const groups = {
-    "Web & personal": ["bheeshma", "ridezilla", "neuroasha"],
-    "Data & intelligence": ["semiconductor-insights", "neuroasha", "wafex"],
-    Engineering: ["arti-e", "wafex", "semiconductor-insights"],
+    "Web & personal": ["bheeshma", "ridezilla", "neuroasha", "claudetrippy"],
+    "Data & intelligence": [
+      "semiconductor-insights",
+      "neuroasha",
+      "wafex",
+      "falconet",
+      "drishtinet",
+    ],
+    Engineering: [
+      "arti-e",
+      "wafex",
+      "semiconductor-insights",
+      "falconet",
+      "claudetrippy",
+    ],
   };
   const visible =
     filter === "All work"
@@ -80,6 +93,7 @@ export function Work() {
 
 export function CaseStudy() {
   const { slug } = useParams();
+  const [animationPaused, setAnimationPaused] = useState(false);
   const project = projects.find((p) => p.slug === slug);
   if (!project) return <NotFound />;
   const index = projects.indexOf(project);
@@ -112,6 +126,11 @@ export function CaseStudy() {
                 Source on GitHub
               </TextLink>
             )}
+            {project.links?.map((link) => (
+              <TextLink key={link.url} to={link.url} external>
+                {link.label}
+              </TextLink>
+            ))}
           </div>
         </div>
         <div className="tech-list mono">
@@ -121,7 +140,17 @@ export function CaseStudy() {
         </div>
       </header>
       <div className="case-visual wrap">
-        <ProjectVisual project={project} large />
+        {projectImages[project.slug]?.poster ? (
+          <div className="project-preview">
+            <ProjectVisual project={project} large paused={animationPaused} />
+            <ProjectAnimationControl
+              paused={animationPaused}
+              onToggle={() => setAnimationPaused(!animationPaused)}
+            />
+          </div>
+        ) : (
+          <ProjectVisual project={project} large />
+        )}
         <span className="case-visual-caption mono">
           {projectImages[project.slug]?.caption ||
             "PROJECT IDENTITY / EDITORIAL COVER"}

@@ -4,7 +4,7 @@ Content is separate from layout code. Rebuild after content changes to regenerat
 
 ## Projects and background
 
-`src/content/projects.js` contains only the six resume projects, their technologies, links, and case studies. `src/content/profile.js` contains background and contact details. The supplied resume is served from `public/Saagar-Kashyap-Resume.pdf`.
+`src/content/projects.js` contains the nine projects in archive order, their technologies, links, and case studies. The six original resume projects retain their content; Falconet, claudetrippy, and DrishtiNet were added from the supplied repositories. Additional external resources use labeled `links` entries so recordings and notebooks are not presented as live applications. `src/content/profile.js` contains background and contact details. The supplied resume is served from `public/Saagar-Kashyap-Resume.pdf`.
 
 The short display title **Semiconductor insights** refers to the resume's **Semiconductor Industry Case Study Dashboard**. Wafex links to `WAFERX`. Bheeshma's source link is its earlier Streamlit edition; its live Vercel app is the newer web edition. NeuroAsha links to its public website repository, distinct from the model repository in the resume. ARTI-E has a live link; no repository URL was invented.
 
@@ -45,6 +45,8 @@ To add photos, copy originals into `public/photos/` and run `npm run photos:sync
 Home contains the shared personal introduction and work experience from `src/components/PersonalBackground.jsx`, followed by Bheeshma, ARTI-E, Wafex, and NeuroAsha image previews. All previews and the gold View all work button open `/work`. NeuroAsha uses the supplied `public/projects/neuroasha.png` MRI/Grad-CAM comparison. Full details remain in Work and the case studies. About retains the full background, skills, education, and certifications.
 
 The Home photography slider shows seven selected photos in a 16:9 frame, with arrows, dots, arrow-key navigation, and touch swipes. Edit the `featuredPhotos` IDs in `src/content/photos.js` to change the selection. It does not autoplay. “Explore my photography” opens `/photos`.
+
+Falconet uses the supplied `public/projects/falconet.gif` (400 by 225, 435 frames, 29 seconds, infinite loop) on both the archive and detail page. Its `falconet-poster.webp` is an actual frame used when paused or when reduced motion is requested. The GIF remains unchanged, lazy-loaded, and uncropped. The supplied [LinkedIn recording](https://lnkd.in/p/gTTDEmjH) resolved successfully during verification; it is a video post. The original animated `public/projects/claudetrippy.gif` (800 × 464, 159 frames, 15.9 seconds, infinite loop) is retained and lazy-loaded. A real frame exported as `claudetrippy-poster.webp` is used when paused or when reduced motion is requested. Pause controls are outside archive links. DrishtiNet uses a native-resolution, lossless `drishtinet.webp` copy of the retained `DrishtiNet.png`: all RGBA pixels are identical, including labels, heatmap colors, and the attention scale. No sharpening, tonal remapping, or AI upscaling is applied to scientific evidence. Both its archive and detail views contain the complete figure. Its case study follows the [supplied draft notebook](https://github.com/saagarnkashyap/DrishtiNet/blob/main/06thMar26_draft1.ipynb), without adding clinical claims or accuracy metrics.
 
 ## Themes, typography, and company marks
 

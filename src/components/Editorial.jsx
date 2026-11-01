@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { useState } from "react";
 import { projectImages } from "../content/project-images";
 import { photos, photoSource, photoSrcSet } from "../content/photos";
 
@@ -110,20 +111,37 @@ export function Photo({
   );
 }
 
-export function ProjectVisual({ project, large = false }) {
+export function ProjectVisual({ project, large = false, paused = false }) {
   const image = projectImages[project.slug];
   if (image) {
     return (
       <div
         className={`project-visual visual-screenshot visual-${project.slug}-screenshot ${large ? "is-large" : ""}`}
       >
-        <img
-          src={image.src}
-          alt={image.alt}
-          width={image.width}
-          height={image.height}
-          loading="lazy"
-        />
+        {image.poster ? (
+          <picture>
+            <source
+              media="(prefers-reduced-motion: reduce)"
+              srcSet={image.poster}
+            />
+            <img
+              src={paused ? image.poster : image.src}
+              alt={image.alt}
+              width={image.width}
+              height={image.height}
+              loading="lazy"
+              decoding="async"
+            />
+          </picture>
+        ) : (
+          <img
+            src={image.src}
+            alt={image.alt}
+            width={image.width}
+            height={image.height}
+            loading="lazy"
+          />
+        )}
       </div>
     );
   }
@@ -194,19 +212,46 @@ export function ProjectVisual({ project, large = false }) {
   );
 }
 
+export function ProjectAnimationControl({ paused, onToggle }) {
+  return (
+    <button
+      className="project-animation-control"
+      type="button"
+      aria-pressed={paused}
+      onClick={onToggle}
+    >
+      {paused ? "Play animation" : "Pause animation"}
+    </button>
+  );
+}
+
 export function ProjectItem({ project, index, featured = false }) {
+  const [paused, setPaused] = useState(false);
+  const cover = (
+    <Link
+      className="project-cover"
+      to={`/work/${project.slug}`}
+      aria-label={`Explore ${project.name}`}
+    >
+      <ProjectVisual project={project} paused={paused} />
+      <span className="project-open">
+        <Arrow diagonal />
+      </span>
+    </Link>
+  );
   return (
     <article className={`project-item ${featured ? "project-featured" : ""}`}>
-      <Link
-        className="project-cover"
-        to={`/work/${project.slug}`}
-        aria-label={`Explore ${project.name}`}
-      >
-        <ProjectVisual project={project} />
-        <span className="project-open">
-          <Arrow diagonal />
-        </span>
-      </Link>
+      {projectImages[project.slug]?.poster ? (
+        <div className="project-preview">
+          {cover}
+          <ProjectAnimationControl
+            paused={paused}
+            onToggle={() => setPaused(!paused)}
+          />
+        </div>
+      ) : (
+        cover
+      )}
       <div className="project-caption">
         <span className="mono project-index">
           {String(index + 1).padStart(2, "0")}

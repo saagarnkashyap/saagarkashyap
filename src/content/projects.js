@@ -77,6 +77,206 @@ export const projects = [
     ],
   },
   {
+    slug: "neuroasha",
+    name: "NeuroAsha",
+    subtitle: "A dementia companion research project.",
+    category: "Machine learning & web",
+    theme: "sage",
+    visual: "neuro",
+    description:
+      "A dementia companion project combining an Alzheimer’s MRI classifier with LLM-based symptom tracking.",
+    technologies: ["Python", "CNN", "Vision Transformers", "Deep learning"],
+    repository: "https://github.com/saagarnkashyap/NeuroAsha-website",
+    live: "https://neuroasha.vercel.app/",
+    sections: [
+      [
+        "The question",
+        "How can image classification and symptom tracking be brought together in a dementia companion research project?",
+      ],
+      [
+        "The approach",
+        "The supplied resume describes a CNN-based Alzheimer’s MRI classifier combined with LLM-based symptom tracking. The work explores both imaging and a conversational interface.",
+      ],
+      [
+        "Design decisions",
+        "Keep the classification experiment and the companion interface understandable as distinct parts of the project. A prediction is an experimental model output, not a clinical conclusion.",
+      ],
+      [
+        "Implementation",
+        "The resume lists Python, convolutional neural networks, Vision Transformers, ImageNet, and deep learning. The linked public repository is the NeuroAsha website; it is distinct from the model repository referenced in the resume.",
+      ],
+      [
+        "Challenges & outcome",
+        "A companion interface needs to communicate what the model can and cannot establish. The project has a published website; no clinical validation, diagnostic reliability, or healthcare deployment is claimed here.",
+      ],
+    ],
+  },
+  {
+    slug: "wafex",
+    name: "WAFERX",
+    subtitle: "Reading patterns in silicon.",
+    category: "Machine learning",
+    theme: "sage",
+    visual: "wafer",
+    description:
+      "A convolutional neural network for classifying semiconductor wafer-map defect patterns using the WM-811K dataset.",
+    technologies: ["Python", "TensorFlow", "Keras", "WM-811K"],
+    repository: "https://github.com/saagarnkashyap/WAFERX",
+    sections: [
+      [
+        "The question",
+        "Can spatial patterns on wafer maps be classified consistently enough to support semiconductor defect screening?",
+      ],
+      [
+        "The approach",
+        "Use the WM-811K manufacturing dataset to train a CNN across eight defect classes, including center, donut, edge-ring, and scratch patterns.",
+      ],
+      [
+        "Design decisions",
+        "Keep the investigation centered on wafer patterns and per-class behavior, rather than reducing the evaluation to one accuracy figure.",
+      ],
+      [
+        "Implementation",
+        "The public README describes 64 × 64 grayscale inputs, three convolutional blocks, batch normalization, dropout, and an eight-class softmax output. TensorFlow and Keras provide the training framework.",
+      ],
+      [
+        "The challenge",
+        "Class imbalance and irregular scratch patterns complicate evaluation. Stratified splitting and per-class precision, recall, and F1 scores help reveal the differences between defect types.",
+      ],
+      [
+        "The result",
+        "A documented wafer defect classification experiment with per-class evaluation and training analysis. The source notebook and project documentation provide a closer look at the model and its behavior.",
+      ],
+    ],
+  },
+  {
+    slug: "falconet",
+    name: "Falconet",
+    subtitle: "A bird’s-eye view of movement.",
+    category: "Computer vision & traffic intelligence",
+    theme: "sage",
+    visual: "falconet",
+    description:
+      "An aerial traffic intelligence system that uses computer vision to turn drone footage into insights about vehicle movement, density, and road activity.",
+    technologies: [
+      "Python",
+      "Ultralytics YOLO26n",
+      "ByteTrack",
+      "OpenCV",
+      "VisDrone",
+    ],
+    repository: "https://github.com/saagarnkashyap/Falconet",
+    links: [
+      {
+        label: "Watch the video on LinkedIn",
+        url: "https://lnkd.in/p/gTTDEmjH",
+      },
+    ],
+    sections: [
+      [
+        "The question",
+        "How can aerial footage reveal vehicle movement and road activity beyond a frame-by-frame view?",
+      ],
+      [
+        "The approach",
+        "Train a YOLO26n detector on VisDrone aerial imagery, then associate detections across video frames with ByteTrack. OpenCV renders vehicle labels, trajectory trails, and density views.",
+      ],
+      [
+        "Implementation",
+        "The repository contains Python scripts for frame extraction, annotation, training, counting, and video rendering. Tracking scripts retain object identities and use their positions to build visual summaries over time.",
+      ],
+      [
+        "The challenge",
+        "Small objects, dense traffic, and changing aerial viewpoints complicate detection and tracking. Counts and visual density summaries depend on the quality of the detections and identity associations.",
+      ],
+      [
+        "The result",
+        "An ongoing traffic-vision experiment with a local animated demonstration and a recorded video on LinkedIn. The preview shows the supplied aerial traffic visualization.",
+      ],
+    ],
+  },
+  {
+    slug: "claudetrippy",
+    name: "claudetrippy",
+    subtitle: "A short film, written in code.",
+    category: "Creative coding & automation",
+    theme: "gold",
+    visual: "claudetrippy",
+    description:
+      "A short-form video made entirely with Python and FFmpeg. No editing timeline, no drag-and-drop software — just code and experimentation.",
+    technologies: ["Python", "Matplotlib", "NumPy", "FFmpeg"],
+    repository: "https://github.com/saagarnkashyap/claudetrippy",
+    sections: [
+      [
+        "The question",
+        "What would a short video about being a language model look like if every frame were generated in code?",
+      ],
+      [
+        "The approach",
+        "Build a sequence of scenes with Matplotlib figures, patches, and text. NumPy drives randomized motion and visual variation.",
+      ],
+      [
+        "Implementation",
+        "The frame-generation script writes PNG frames. A shell script uses FFmpeg to assemble them into a video. The local GIF preserves an animated demonstration of the result.",
+      ],
+      [
+        "Design decisions",
+        "Tokens, probability bars, fading fragments, and a terminal sequence establish the visual language. Timing and transitions come from the scripts.",
+      ],
+      [
+        "The result",
+        "A code-generated creative experiment with an animated preview and source repository. Reduced-motion visitors see a still frame; the animation can also be paused.",
+      ],
+    ],
+  },
+  {
+    slug: "drishtinet",
+    name: "DrishtiNet",
+    subtitle: "Looking closer at model attention.",
+    category: "Medical AI & explainability",
+    theme: "sage",
+    visual: "drishtinet",
+    description:
+      "An exploration of concept-aware retinal disease classification, using explainable AI to make model predictions easier to investigate.",
+    technologies: [
+      "Python",
+      "TensorFlow / Keras",
+      "EfficientNetB0",
+      "OpenCV",
+      "Grad-CAM",
+      "ODIR-5K",
+    ],
+    repository: "https://github.com/saagarnkashyap/DrishtiNet",
+    links: [
+      {
+        label: "Read the research notebook",
+        url: "https://github.com/saagarnkashyap/DrishtiNet/blob/main/06thMar26_draft1.ipynb",
+      },
+    ],
+    sections: [
+      [
+        "The question",
+        "How can retinal-image classification be explored alongside visual explanations of where a model directs its attention?",
+      ],
+      [
+        "The approach",
+        "The draft notebook loads ODIR-5K fundus images and labels, resizes images to 224 × 224 pixels, normalizes their values, and creates a training/test split.",
+      ],
+      [
+        "Implementation",
+        "An ImageNet-initialized EfficientNetB0 backbone feeds global average pooling and an eight-output softmax classifier, trained with categorical cross-entropy. Visualization cells place the original retinal image beside a Grad-CAM heatmap and an overlay.",
+      ],
+      [
+        "The challenge",
+        "The notebook records an overfitting issue. An augmentation configuration is defined, but the shown training call uses the image arrays directly. Regularization, training changes, and further evaluation remain work to investigate.",
+      ],
+      [
+        "The result",
+        "An exploratory research notebook and a supplied visualization of model attention. The figure retains its original pixels, labels, color scale, and panel arrangement. The work does not establish clinical validity or a deployed diagnostic system.",
+      ],
+    ],
+  },
+  {
     slug: "semiconductor-insights",
     name: "Semiconductor insights",
     subtitle: "Making the numbers comparable.",
@@ -117,44 +317,6 @@ export const projects = [
     ],
   },
   {
-    slug: "wafex",
-    name: "Wafex",
-    subtitle: "Reading patterns in silicon.",
-    category: "Machine learning",
-    theme: "sage",
-    visual: "wafer",
-    description:
-      "A convolutional neural network for classifying semiconductor wafer-map defect patterns using the WM-811K dataset.",
-    technologies: ["Python", "TensorFlow", "Keras", "WM-811K"],
-    repository: "https://github.com/saagarnkashyap/WAFERX",
-    sections: [
-      [
-        "The question",
-        "Can spatial patterns on wafer maps be classified consistently enough to support semiconductor defect screening?",
-      ],
-      [
-        "The approach",
-        "Use the WM-811K manufacturing dataset to train a CNN across eight defect classes, including center, donut, edge-ring, and scratch patterns.",
-      ],
-      [
-        "Design decisions",
-        "Keep the investigation centered on wafer patterns and per-class behavior, rather than reducing the evaluation to one accuracy figure.",
-      ],
-      [
-        "Implementation",
-        "The public README describes 64 × 64 grayscale inputs, three convolutional blocks, batch normalization, dropout, and an eight-class softmax output. TensorFlow and Keras provide the training framework.",
-      ],
-      [
-        "The challenge",
-        "Class imbalance and irregular scratch patterns complicate evaluation. Stratified splitting and per-class precision, recall, and F1 scores help reveal the differences between defect types.",
-      ],
-      [
-        "The result",
-        "A documented wafer defect classification experiment with per-class evaluation and training analysis. The source notebook and project documentation provide a closer look at the model and its behavior.",
-      ],
-    ],
-  },
-  {
     slug: "ridezilla",
     name: "RideZilla",
     subtitle: "A closer look at the ride.",
@@ -190,41 +352,6 @@ export const projects = [
       [
         "The result",
         "A personal cycling dashboard for exploring speed, distance, elevation, and consistency, with published source and a documented setup.",
-      ],
-    ],
-  },
-  {
-    slug: "neuroasha",
-    name: "NeuroAsha",
-    subtitle: "A dementia companion research project.",
-    category: "Machine learning & web",
-    theme: "sage",
-    visual: "neuro",
-    description:
-      "A dementia companion project combining an Alzheimer’s MRI classifier with LLM-based symptom tracking.",
-    technologies: ["Python", "CNN", "Vision Transformers", "Deep learning"],
-    repository: "https://github.com/saagarnkashyap/NeuroAsha-website",
-    live: "https://neuroasha.vercel.app/",
-    sections: [
-      [
-        "The question",
-        "How can image classification and symptom tracking be brought together in a dementia companion research project?",
-      ],
-      [
-        "The approach",
-        "The supplied resume describes a CNN-based Alzheimer’s MRI classifier combined with LLM-based symptom tracking. The work explores both imaging and a conversational interface.",
-      ],
-      [
-        "Design decisions",
-        "Keep the classification experiment and the companion interface understandable as distinct parts of the project. A prediction is an experimental model output, not a clinical conclusion.",
-      ],
-      [
-        "Implementation",
-        "The resume lists Python, convolutional neural networks, Vision Transformers, ImageNet, and deep learning. The linked public repository is the NeuroAsha website; it is distinct from the model repository referenced in the resume.",
-      ],
-      [
-        "Challenges & outcome",
-        "A companion interface needs to communicate what the model can and cannot establish. The project has a published website; no clinical validation, diagnostic reliability, or healthcare deployment is claimed here.",
       ],
     ],
   },

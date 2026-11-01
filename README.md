@@ -1,6 +1,6 @@
 # Saagar Kashyap — personal portfolio
 
-An editorial portfolio built with React 19, Vite, React Router, local fonts, original photographs, and a Markdown publishing system. Selected work contains only the six projects from the supplied resume. Strava integration is deferred.
+An editorial portfolio built with React 19, Vite, React Router, local fonts, original photographs, and a Markdown publishing system. Selected work contains nine projects, including the six original resume projects and three additional projects supplied by the author. Strava integration is deferred.
 
 ```sh
 npm ci
