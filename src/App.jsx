@@ -5,7 +5,9 @@ import Home from "./views/Home";
 import { Work, CaseStudy } from "./views/Work";
 import { Writing, Article } from "./views/Writing";
 import Photos from "./views/Photos";
-import { About, Now, Cycling } from "./views/Personal";
+import { About, Now } from "./views/Personal";
+import Strava from "./views/Strava";
+import StravaTrophies from "./views/StravaTrophies";
 import NotFound from "./views/NotFound";
 import { getMetadata } from "./lib/metadata";
 
@@ -60,10 +62,15 @@ export default function App() {
             <Route path="/writing" element={<Writing />} />
             <Route path="/writing/:slug" element={<Article />} />
             <Route path="/photos" element={<Photos />} />
-            <Route path="/cycling" element={<Cycling />} />
+            <Route path="/strava" element={<Strava />} />
+            <Route path="/strava/trophies" element={<StravaTrophies />} />
+            <Route
+              path="/cycling"
+              element={<Navigate to="/strava" replace />}
+            />
             <Route
               path="/running"
-              element={<Navigate to="/cycling" replace />}
+              element={<Navigate to="/strava" replace />}
             />
             <Route path="/about" element={<About />} />
             <Route path="/now" element={<Now />} />

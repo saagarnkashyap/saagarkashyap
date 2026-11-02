@@ -4,7 +4,8 @@
   "cleanUrls": true,
   "trailingSlash": false,
   "redirects": [
-    { "source": "/running", "destination": "/cycling", "permanent": true },
+    { "source": "/running", "destination": "/strava", "permanent": true },
+    { "source": "/cycling", "destination": "/strava", "permanent": true },
     { "source": "/projects", "destination": "/work", "permanent": true },
     { "source": "/blog", "destination": "/writing", "permanent": true },
     { "source": "/blog/myblogs", "destination": "/writing", "permanent": true },

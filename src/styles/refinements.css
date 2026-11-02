@@ -1,4 +1,19 @@
 /* Shared presentation refinements, applied after the original responsive rules. */
+/* The following chapter supplies the single section divider. */
+.experience-list > article:last-child {
+  border-bottom: 0;
+}
+.home-project-preview:last-child .home-project-title {
+  border-bottom: 0;
+}
+@media (min-width: 761px) {
+  .home-project-preview:nth-last-child(2) .home-project-title {
+    border-bottom: 0;
+  }
+}
+.credentials .chapter > h2.eyebrow {
+  margin: 0;
+}
 :root {
   --display: Geist, Arial, sans-serif;
   --wordmark-first-name: #d0b47b;

@@ -1,18 +1,9 @@
-# Strava — deferred final phase
+# Strava embeds and future API work
 
-The user requested that Strava API work and implementation be kept until last. The current build contains no Strava authentication, token storage, requests, activity data, or fabricated statistics. `/cycling` is a journal empty state. RideZilla is a separate, existing resume project.
+The Strava page at `/strava` replaces the old cycling empty state. `/cycling` and `/running` redirect to it. The user explicitly supplied seven public activity embeds and a weekly summary widget, then provided all-time cycling totals, best efforts, and gear details for display.
 
-When this phase starts:
+`src/content/strava.js` stores those supplied values as a snapshot dated 2 November 2026. They do not refresh automatically. The seven official Strava activity iframes load directly from Strava; their public share tokens are embed parameters, not API credentials. Each activity retains a direct link when the third-party embed is unavailable. The activity component matches the official embed script's resize protocol while checking iframe origin, source, namespace, and height bounds, and cleans up its listeners on unmount.
 
-1. Confirm which activities and privacy levels Saagar wants public. Do not publish private activities or sensitive route coordinates by default.
-2. Register the portfolio application and confirm its callback domain. Review the current official documentation:
-   - https://developers.strava.com/docs/authentication/
-   - https://developers.strava.com/docs/reference/
-   - https://developers.strava.com/docs/rate-limits/
-3. Add Vercel server functions for authorization and callback handling, including request-bound state validation and owner-only authorization.
-4. Keep client secrets and refresh tokens in server-only configuration and durable private storage. Never use `VITE_` variables for secrets or send tokens to the browser.
-5. Refresh credentials server-side, cache a curated public response, and handle rate limits, revoked access, empty history, pagination, time zones, and failures.
-6. Build totals, recent rides, monthly activity, and optional routes from real records. Existing decorative illustrations are not GPS tracks or activity charts.
-7. Verify the full flow with the owner's Strava authorization before describing it as connected.
+The public athlete profile requires sign-in before exposing lifetime totals, gear, or trophy badges. Supplied numbers are displayed as given. The weekly summary widget was subsequently removed at the author's request. The subsequently supplied saved trophy page provided 293 actual challenge badges. Only names, dates, challenge links, and badge image paths are extracted into `src/content/strava-trophies.json`; WebP display copies are served locally under `public/strava-trophies/`, preserving aspect ratio and transparency. Original image downloads are kept under `.tools/strava/trophy-originals/`. The original signed-in HTML, which contains account page metadata, is preserved under `.tools/strava/strava_trophy.html` outside the public tree. Six badges appear on `/strava`. Show more trophies opens `/strava/trophies`, where the remaining supplied photo is aligned with the desktop introduction and remains uncropped at 240 pixels wide on phones, followed by the full gallery. Trophies is in the main navigation immediately after Strava; there is no secondary tab bar.
 
-No credentials are needed for the current portfolio. Authentication and integration remain unimplemented and untested.
+RideZilla remains a separate existing project. No Strava OAuth application, access tokens, refresh tokens, or API integration is implemented. If automatic lifetime/gear updates are requested later, review the current official [authentication](https://developers.strava.com/docs/authentication/), [API reference](https://developers.strava.com/docs/reference/), and [rate limits](https://developers.strava.com/docs/rate-limits/) before implementing an owner-authorized server-side integration.

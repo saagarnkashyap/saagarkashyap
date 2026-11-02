@@ -11,32 +11,12 @@ export const projects = [
     technologies: ["React", "Python", "Structured verse data"],
     live: "https://bheeshma.vercel.app/",
     repository: "https://github.com/saagarnkashyap/Bheeshma",
-    sections: [
-      [
-        "The question",
-        "How can a digital edition make a complex philosophical text approachable while preserving the relationship between the original Sanskrit, its translation, and its interpretation?",
-      ],
-      [
-        "The approach",
-        "Organize the experience around chapters and verses, with paths into translations, guidance, and recitations. The current web edition gives each part its own place instead of presenting the text as one long document.",
-      ],
-      [
-        "Design decisions",
-        "Dark surfaces, warm gold accents, Devanagari, and a distinct reading hierarchy establish the atmosphere. The chapter index gives a direct route into the text; the visual identity serves the reading experience.",
-      ],
-      [
-        "Implementation",
-        "The current React edition uses verse data collected and processed with Python from Gita Supersite. The linked public repository documents the earlier Streamlit edition, including chapter exploration, emotion-to-verse matching, and audio fallback.",
-      ],
-      [
-        "The challenge",
-        "Sanskrit, transliteration, meaning, interpretation, and audio all need to remain connected to the right verse. The earlier source also handles unavailable recitation files with a speech fallback.",
-      ],
-      [
-        "The result",
-        "A live digital study edition with chapter navigation, guidance, and audio. The live application and the public repository document different stages of the project.",
-      ],
+    summary: [
+      "Explore chapters and verses with Sanskrit, translations, and guidance.",
+      "Listen to recitations and audio alongside the text.",
+      "Built with React and verse data collected using Python.",
     ],
+    note: "The linked GitHub repository documents the earlier Streamlit edition.",
   },
   {
     slug: "arti-e",
@@ -49,31 +29,10 @@ export const projects = [
       "A browser-based wafer-handling simulator combining computer vision, robotic motion planning, and a three-dimensional workcell.",
     technologies: ["Python", "OpenCV", "FastAPI", "React", "Three.js"],
     live: "https://arti-e.vercel.app/",
-    sections: [
-      [
-        "The question",
-        "How can vision-guided wafer transfers and robot motion planning be explored in a browser without a physical semiconductor workcell?",
-      ],
-      [
-        "The approach",
-        "Represent the workcell in 3D and connect wafer localization, inverse kinematics, and collision-aware path planning. The project models both 3-DOF and 4-DOF robotic arms.",
-      ],
-      [
-        "Design decisions",
-        "A technical interface brings the workcell, planning controls, and trajectory information into the same view. Spatial relationships carry the explanation rather than a decorative 3D scene.",
-      ],
-      [
-        "Implementation",
-        "The supplied resume documents a React and Three.js frontend, a Python and FastAPI backend, OpenCV wafer localization, and RRT-Connect motion planning. Trajectory visualization makes the simulated transfer inspectable.",
-      ],
-      [
-        "The challenge",
-        "Localization, reachable poses, collision checks, and trajectories need to agree on the workcell geometry. The simulator includes obstacle avoidance and performance benchmarking for evaluating planned transfers.",
-      ],
-      [
-        "The result",
-        "A live browser simulator for semiconductor wafer handling, with an inspectable workcell, motion controls, and trajectory visualization.",
-      ],
+    summary: [
+      "Inspect a browser-based 3D wafer-handling workcell.",
+      "Localize wafers with OpenCV and plan collision-aware transfers using RRT-Connect.",
+      "Explore 3-DOF and 4-DOF arms with trajectory visualization.",
     ],
   },
   {
@@ -88,28 +47,12 @@ export const projects = [
     technologies: ["Python", "CNN", "Vision Transformers", "Deep learning"],
     repository: "https://github.com/saagarnkashyap/NeuroAsha-website",
     live: "https://neuroasha.vercel.app/",
-    sections: [
-      [
-        "The question",
-        "How can image classification and symptom tracking be brought together in a dementia companion research project?",
-      ],
-      [
-        "The approach",
-        "The supplied resume describes a CNN-based Alzheimer’s MRI classifier combined with LLM-based symptom tracking. The work explores both imaging and a conversational interface.",
-      ],
-      [
-        "Design decisions",
-        "Keep the classification experiment and the companion interface understandable as distinct parts of the project. A prediction is an experimental model output, not a clinical conclusion.",
-      ],
-      [
-        "Implementation",
-        "The resume lists Python, convolutional neural networks, Vision Transformers, ImageNet, and deep learning. The linked public repository is the NeuroAsha website; it is distinct from the model repository referenced in the resume.",
-      ],
-      [
-        "Challenges & outcome",
-        "A companion interface needs to communicate what the model can and cannot establish. The project has a published website; no clinical validation, diagnostic reliability, or healthcare deployment is claimed here.",
-      ],
+    summary: [
+      "Combines an Alzheimer's MRI classification experiment with LLM-based symptom tracking.",
+      "Explores CNNs and Vision Transformers alongside a companion website.",
+      "Includes supplied MRI and Grad-CAM research visualizations.",
     ],
+    note: "Research only; no clinical validation is claimed. The linked GitHub repository contains the website.",
   },
   {
     slug: "wafex",
@@ -122,32 +65,12 @@ export const projects = [
       "A convolutional neural network for classifying semiconductor wafer-map defect patterns using the WM-811K dataset.",
     technologies: ["Python", "TensorFlow", "Keras", "WM-811K"],
     repository: "https://github.com/saagarnkashyap/WAFERX",
-    sections: [
-      [
-        "The question",
-        "Can spatial patterns on wafer maps be classified consistently enough to support semiconductor defect screening?",
-      ],
-      [
-        "The approach",
-        "Use the WM-811K manufacturing dataset to train a CNN across eight defect classes, including center, donut, edge-ring, and scratch patterns.",
-      ],
-      [
-        "Design decisions",
-        "Keep the investigation centered on wafer patterns and per-class behavior, rather than reducing the evaluation to one accuracy figure.",
-      ],
-      [
-        "Implementation",
-        "The public README describes 64 × 64 grayscale inputs, three convolutional blocks, batch normalization, dropout, and an eight-class softmax output. TensorFlow and Keras provide the training framework.",
-      ],
-      [
-        "The challenge",
-        "Class imbalance and irregular scratch patterns complicate evaluation. Stratified splitting and per-class precision, recall, and F1 scores help reveal the differences between defect types.",
-      ],
-      [
-        "The result",
-        "A documented wafer defect classification experiment with per-class evaluation and training analysis. The source notebook and project documentation provide a closer look at the model and its behavior.",
-      ],
+    summary: [
+      "Classifies eight wafer-map defect patterns from WM-811K.",
+      "Uses a TensorFlow/Keras CNN with 64 × 64 grayscale inputs.",
+      "Evaluates per-class precision, recall, and F1 scores.",
     ],
+    note: "Scratch patterns and class imbalance remain challenges.",
   },
   {
     slug: "falconet",
@@ -172,28 +95,12 @@ export const projects = [
         url: "https://lnkd.in/p/gTTDEmjH",
       },
     ],
-    sections: [
-      [
-        "The question",
-        "How can aerial footage reveal vehicle movement and road activity beyond a frame-by-frame view?",
-      ],
-      [
-        "The approach",
-        "Train a YOLO26n detector on VisDrone aerial imagery, then associate detections across video frames with ByteTrack. OpenCV renders vehicle labels, trajectory trails, and density views.",
-      ],
-      [
-        "Implementation",
-        "The repository contains Python scripts for frame extraction, annotation, training, counting, and video rendering. Tracking scripts retain object identities and use their positions to build visual summaries over time.",
-      ],
-      [
-        "The challenge",
-        "Small objects, dense traffic, and changing aerial viewpoints complicate detection and tracking. Counts and visual density summaries depend on the quality of the detections and identity associations.",
-      ],
-      [
-        "The result",
-        "An ongoing traffic-vision experiment with a local animated demonstration and a recorded video on LinkedIn. The preview shows the supplied aerial traffic visualization.",
-      ],
+    summary: [
+      "Custom YOLO26n detector trained on the VisDrone aerial dataset.",
+      "Uses ByteTrack to follow vehicle movement across frames.",
+      "Renders traffic counts, density views, and trajectory trails with OpenCV.",
     ],
+    note: "The GIF and LinkedIn post are recorded demonstrations of an ongoing experiment.",
   },
   {
     slug: "claudetrippy",
@@ -206,27 +113,10 @@ export const projects = [
       "A short-form video made entirely with Python and FFmpeg. No editing timeline, no drag-and-drop software — just code and experimentation.",
     technologies: ["Python", "Matplotlib", "NumPy", "FFmpeg"],
     repository: "https://github.com/saagarnkashyap/claudetrippy",
-    sections: [
-      [
-        "The question",
-        "What would a short video about being a language model look like if every frame were generated in code?",
-      ],
-      [
-        "The approach",
-        "Build a sequence of scenes with Matplotlib figures, patches, and text. NumPy drives randomized motion and visual variation.",
-      ],
-      [
-        "Implementation",
-        "The frame-generation script writes PNG frames. A shell script uses FFmpeg to assemble them into a video. The local GIF preserves an animated demonstration of the result.",
-      ],
-      [
-        "Design decisions",
-        "Tokens, probability bars, fading fragments, and a terminal sequence establish the visual language. Timing and transitions come from the scripts.",
-      ],
-      [
-        "The result",
-        "A code-generated creative experiment with an animated preview and source repository. Reduced-motion visitors see a still frame; the animation can also be paused.",
-      ],
+    summary: [
+      "Generates every frame with Python, Matplotlib, and NumPy.",
+      "Uses FFmpeg to assemble the frames into a short video.",
+      "Explores tokens, probability graphics, and terminal visuals.",
     ],
   },
   {
@@ -253,28 +143,12 @@ export const projects = [
         url: "https://github.com/saagarnkashyap/DrishtiNet/blob/main/06thMar26_draft1.ipynb",
       },
     ],
-    sections: [
-      [
-        "The question",
-        "How can retinal-image classification be explored alongside visual explanations of where a model directs its attention?",
-      ],
-      [
-        "The approach",
-        "The draft notebook loads ODIR-5K fundus images and labels, resizes images to 224 × 224 pixels, normalizes their values, and creates a training/test split.",
-      ],
-      [
-        "Implementation",
-        "An ImageNet-initialized EfficientNetB0 backbone feeds global average pooling and an eight-output softmax classifier, trained with categorical cross-entropy. Visualization cells place the original retinal image beside a Grad-CAM heatmap and an overlay.",
-      ],
-      [
-        "The challenge",
-        "The notebook records an overfitting issue. An augmentation configuration is defined, but the shown training call uses the image arrays directly. Regularization, training changes, and further evaluation remain work to investigate.",
-      ],
-      [
-        "The result",
-        "An exploratory research notebook and a supplied visualization of model attention. The figure retains its original pixels, labels, color scale, and panel arrangement. The work does not establish clinical validity or a deployed diagnostic system.",
-      ],
+    summary: [
+      "Explores retinal-image classification using ODIR-5K fundus images.",
+      "Uses an ImageNet-initialized EfficientNetB0 model with eight output classes.",
+      "Pairs retinal images with Grad-CAM heatmaps and overlays.",
     ],
+    note: "Draft research notebook with an overfitting issue; no clinical validation or diagnostic deployment is claimed.",
   },
   {
     slug: "semiconductor-insights",
@@ -289,31 +163,10 @@ export const projects = [
     technologies: ["Python", "Pandas", "Streamlit", "Excel"],
     live: "https://sd-insights.streamlit.app/",
     repository: "https://github.com/saagarnkashyap/Sandisk-Corp",
-    sections: [
-      [
-        "The question",
-        "What becomes visible when financial and inventory data from semiconductor companies is brought into a consistent, explorable view?",
-      ],
-      [
-        "The approach",
-        "Collect and transform financial datasets, then compare revenue, cost of goods sold, inventory, and cash flow across Western Digital, Micron, Intel, and TSMC.",
-      ],
-      [
-        "Design decisions",
-        "Use a structured dashboard to support comparison and trend inspection. The analytical work is organized around business measures, with the underlying data preparation kept in Python scripts.",
-      ],
-      [
-        "Implementation",
-        "Python and Pandas handle processing and transformation. Streamlit presents the dashboard, while the repository also contains Excel processing tools, inventory comparison data, and automation scripts.",
-      ],
-      [
-        "The challenge",
-        "Comparisons depend on preparing data consistently. The project separates data automation and Excel handling from the dashboard so that the analysis can be traced back to its inputs.",
-      ],
-      [
-        "The result",
-        "A published case-study dashboard with comparative financial analysis, inventory processing tools, and an accessible source repository.",
-      ],
+    summary: [
+      "Compares Western Digital, Micron, Intel, and TSMC.",
+      "Explores revenue, inventory, cost of goods sold, and cash flow.",
+      "Uses Python/Pandas for preparation and Streamlit for the dashboard.",
     ],
   },
   {
@@ -328,31 +181,11 @@ export const projects = [
     technologies: ["Python", "Streamlit", "Pandas", "Strava API"],
     repository: "https://github.com/saagarnkashyap/RideZilla",
     live: "https://ridezilla.streamlit.app/",
-    sections: [
-      [
-        "The question",
-        "What can ride history reveal about pacing and consistency when activities are viewed together rather than one at a time?",
-      ],
-      [
-        "The approach",
-        "Bring cycling activity data into an interactive dashboard with monthly average speed comparisons, recent ride plots, and weekly consistency tracking.",
-      ],
-      [
-        "Design decisions",
-        "Emphasize relationships between distance, pace, elevation, and speed. The dashboard supports personal reflection on performance rather than competition between athletes.",
-      ],
-      [
-        "Implementation",
-        "Python, Pandas, Matplotlib, Seaborn, and Streamlit process and present the data. The public project supports CSV data and activity fetching through a supplied Strava token.",
-      ],
-      [
-        "The challenge",
-        "Activity access and expiring credentials need careful handling. The public README describes a personal token-based setup, not a complete multi-user OAuth flow.",
-      ],
-      [
-        "The result",
-        "A personal cycling dashboard for exploring speed, distance, elevation, and consistency, with published source and a documented setup.",
-      ],
+    summary: [
+      "Explores cycling distance, speed, elevation, and consistency.",
+      "Includes monthly comparisons and recent-ride visualizations.",
+      "Supports CSV imports and personal Strava-token activity fetching.",
     ],
+    note: "Personal token-based setup; full multi-user OAuth is not implemented.",
   },
 ];

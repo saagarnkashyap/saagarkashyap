@@ -22,7 +22,7 @@ try {
         "/work",
         "/writing",
         "/photos",
-        "/cycling",
+        "/strava",
         "/about",
       ]) {
         await page.goto(`http://127.0.0.1:4173${route}`, {

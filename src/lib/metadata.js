@@ -19,9 +19,13 @@ const pages = {
     "The art of paying attention",
     "Original street, night, and everyday photographs by Saagar Kashyap.",
   ],
-  "/cycling": [
-    "Cycling Journal",
-    "A personal logbook for rides, routes, and time outside. Activity records have not been connected yet.",
+  "/strava": [
+    "Strava",
+    "Saagar Kashyap’s all-time cycling stats, best efforts, bikes, trophy case, and selected activities on Strava.",
+  ],
+  "/strava/trophies": [
+    "Trophy case",
+    "Saagar Kashyap’s finisher medal photos and complete collection of Strava challenge badges.",
   ],
   "/about": [
     "A little about Saagar",

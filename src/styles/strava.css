@@ -1,0 +1,411 @@
+.strava-page {
+  padding-bottom: 80px;
+}
+.page-intro-strava {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(280px, 360px);
+  column-gap: 64px;
+  align-items: center;
+}
+.page-intro-strava .page-intro-heading {
+  display: contents;
+}
+.page-intro-strava .page-title-row {
+  grid-column: 1;
+  grid-row: 1;
+  align-self: end;
+}
+.page-intro-strava .page-intro-copy {
+  grid-column: 1;
+  grid-row: 2;
+  align-self: start;
+  margin: 14px 0 0 35px;
+}
+.page-intro-strava .page-intro-actions {
+  grid-column: 2;
+  grid-row: 1 / span 2;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  min-width: 0;
+}
+.strava-intro-photo {
+  width: 100%;
+  margin: 0 0 14px;
+}
+.strava-intro-photo img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.page-intro-strava .text-link {
+  font-size: 13px;
+}
+.strava-snapshot {
+  color: var(--muted);
+  font-size: 10px;
+  margin-top: 8px;
+  line-height: 1.6;
+}
+.strava-totals,
+.strava-records {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 24px;
+  margin: 28px 0 48px;
+}
+.strava-totals dt,
+.strava-records dt {
+  font-size: 14px;
+  color: var(--muted);
+  margin-bottom: 12px;
+}
+.strava-totals dd {
+  font-size: clamp(26px, 2.5vw, 36px);
+  font-weight: 550;
+  letter-spacing: -0.04em;
+  line-height: 1.25;
+  margin: 0;
+  font-variant-numeric: tabular-nums;
+}
+.strava-totals dd > span {
+  margin-left: 0.2em;
+  font-size: 16px;
+  font-weight: 400;
+  letter-spacing: 0;
+}
+.strava-gear {
+  margin-bottom: 48px;
+}
+.strava-bikes {
+  list-style: none;
+  padding: 0;
+  margin: 24px 0 0;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 24px;
+}
+.strava-bikes li {
+  min-width: 0;
+}
+.strava-bikes .text-link {
+  font-size: 22px;
+  gap: 15px;
+  border: 0;
+  padding: 0;
+}
+.strava-bikes li > span {
+  display: block;
+  margin-top: 12px;
+  font-size: 14px;
+  font-variant-numeric: tabular-nums;
+}
+.strava-records {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin-bottom: 32px;
+}
+.strava-records dd {
+  margin: 0;
+}
+.strava-records .text-link {
+  font-size: clamp(22px, 2.3vw, 32px);
+  gap: 16px;
+  letter-spacing: -0.04em;
+  padding: 0;
+  border: 0;
+  max-width: 100%;
+}
+.strava-effort-times {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(95px, 1fr));
+  gap: 24px 12px;
+  border-block: 1px solid var(--line);
+  padding: 20px 0;
+  margin: 24px 0 0;
+}
+.strava-effort-times > div {
+  min-width: 0;
+}
+.strava-effort-times dt {
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--muted);
+  margin-bottom: 10px;
+}
+.strava-effort-times dd {
+  margin: 0;
+}
+.strava-effort-times a {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 18px;
+  font-variant-numeric: tabular-nums;
+}
+.strava-effort-times a:hover {
+  color: var(--gold);
+}
+.strava-effort-times .arrow {
+  width: 12px;
+  height: 12px;
+  flex-shrink: 0;
+}
+.strava-trophies {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 24px;
+  margin: 26px 0 48px;
+  font-size: 14px;
+  line-height: 1.7;
+}
+.strava-best-efforts {
+  margin-bottom: 48px;
+}
+.strava-trophy-grid {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 32px 24px;
+  list-style: none;
+  margin: 30px 0;
+  padding: 0;
+}
+.strava-medal-moments {
+  margin: 16px 0 28px;
+}
+.strava-medal-photos {
+  display: flex;
+  gap: 20px;
+  max-width: 500px;
+  align-items: flex-start;
+}
+.strava-medal-photos img {
+  display: block;
+  width: 100%;
+  max-width: 240px;
+  min-width: 0;
+  flex: 0 1 240px;
+  height: auto;
+}
+.strava-medal-moments figcaption {
+  font-size: 12px;
+  color: var(--muted);
+  margin-top: 14px;
+  line-height: 1.6;
+}
+.strava-trophy-grid li {
+  min-width: 0;
+}
+.strava-trophy-grid a {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+}
+.strava-trophy-grid img {
+  display: block;
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
+}
+.strava-trophy-grid a > span {
+  font-size: 12px;
+  line-height: 1.6;
+  overflow-wrap: anywhere;
+}
+.strava-trophy-grid a:hover > span {
+  color: var(--gold);
+}
+.strava-trophy-grid time {
+  font-size: 11px;
+  color: var(--muted);
+}
+.strava-embed-note {
+  font-size: 14px;
+  line-height: 1.8;
+  color: var(--muted);
+  margin: 6px 0 28px;
+  max-width: 620px;
+}
+.strava-activities {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 28px 20px;
+  align-items: start;
+}
+.strava-activity {
+  min-width: 0;
+  max-width: 554px;
+  width: 100%;
+}
+.strava-activity iframe {
+  display: block;
+  border: 0;
+  width: 100%;
+  background: white;
+}
+.strava-activity-link {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  border-bottom: 1px solid var(--line);
+  padding: 18px 0;
+  font-size: 10px;
+  line-height: 1.5;
+}
+.strava-activity-link:hover {
+  color: var(--gold);
+}
+@media (max-width: 1279px) and (min-width: 761px) {
+  .strava-activities {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media (max-width: 760px) {
+  .page-intro-strava {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0;
+  }
+  .page-intro-strava .page-intro-copy {
+    margin: 12px 0 0;
+  }
+  .page-intro-strava .page-intro-actions {
+    grid-column: 1;
+    grid-row: 3;
+    width: 100%;
+    max-width: 320px;
+    margin-top: 22px;
+  }
+  .strava-totals {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 28px 16px;
+  }
+  .strava-activities {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 32px;
+  }
+  .strava-records {
+    gap: 12px;
+  }
+  .strava-records dt {
+    font-size: 12px;
+    line-height: 1.5;
+  }
+  .strava-records .text-link {
+    font-size: 18px;
+    gap: 6px;
+  }
+  .strava-records .arrow {
+    width: 12px;
+    flex-shrink: 0;
+  }
+  .strava-bikes {
+    gap: 12px;
+    margin-top: 16px;
+  }
+  .strava-bikes .text-link {
+    font-size: 16px;
+    gap: 6px;
+  }
+  .strava-bikes .arrow {
+    width: 12px;
+    flex-shrink: 0;
+  }
+  .strava-bikes li > span {
+    font-size: 12px;
+  }
+  .strava-effort-times {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+  .strava-effort-times a {
+    font-size: 16px;
+  }
+  .strava-trophies {
+    flex-direction: column;
+    gap: 12px;
+  }
+  .strava-trophy-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 28px 20px;
+  }
+}
+
+/* Desktop photographs form part of each introduction; mobile stays uncropped. */
+@media (min-width: 761px) {
+  .page-intro-strava {
+    grid-template-columns: minmax(0, 1fr) clamp(280px, 32vw, 420px);
+    grid-template-rows: 1fr auto 1fr;
+    align-items: start;
+  }
+  .page-intro-strava .page-intro-actions {
+    display: contents;
+  }
+  .page-intro-strava .strava-intro-photo {
+    grid-column: 2;
+    grid-row: 1 / span 3;
+    align-self: center;
+    margin: 0;
+  }
+  .page-intro-strava .strava-intro-photo img {
+    height: clamp(180px, 18vw, 240px);
+    object-fit: cover;
+    object-position: 80% center;
+  }
+  .page-intro-strava .page-intro-actions > .text-link {
+    grid-column: 1;
+    grid-row: 3;
+    justify-self: start;
+    align-self: start;
+    margin: 18px 0 0 35px;
+  }
+  .trophy-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(240px, 320px);
+    column-gap: 64px;
+    align-items: center;
+    width: calc(100% - 160px);
+    max-width: 1280px;
+    margin-inline: auto;
+  }
+  .trophy-layout > .page-intro {
+    grid-column: 1;
+    grid-row: 1;
+    width: 100%;
+    min-width: 0;
+    padding: 36px 0 30px;
+  }
+  .trophy-layout .page-intro-heading {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+  }
+  .trophy-layout > .strava-page {
+    display: contents;
+  }
+  .trophy-layout .strava-medal-moments {
+    grid-column: 2;
+    grid-row: 1;
+    width: 100%;
+    margin: 36px 0 30px;
+  }
+  .trophy-layout .strava-medal-photos {
+    display: block;
+    max-width: none;
+  }
+  .trophy-layout .strava-medal-photos img {
+    max-width: none;
+    height: 200px;
+    object-fit: cover;
+    object-position: 80% center;
+  }
+  .trophy-layout .strava-page > section {
+    grid-column: 1 / -1;
+    padding-bottom: 80px;
+  }
+}
+@media (min-width: 761px) and (max-width: 1100px) {
+  .trophy-layout {
+    width: calc(100% - 72px);
+  }
+}

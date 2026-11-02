@@ -1,7 +1,6 @@
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useState } from "react";
 import {
-  Chapter,
   PageIntro,
   ProjectAnimationControl,
   ProjectItem,
@@ -97,7 +96,10 @@ export function CaseStudy() {
   const project = projects.find((p) => p.slug === slug);
   if (!project) return <NotFound />;
   const index = projects.indexOf(project);
-  const next = projects[(index + 1) % projects.length];
+  const relatedProjects = Array.from(
+    { length: Math.min(4, projects.length - 1) },
+    (_, offset) => projects[(index + offset + 1) % projects.length],
+  );
   return (
     <article className={`case-study theme-${project.theme}`}>
       <header className="case-header wrap">
@@ -156,26 +158,45 @@ export function CaseStudy() {
             "PROJECT IDENTITY / EDITORIAL COVER"}
         </span>
       </div>
-      <div className="case-body wrap">
-        {project.sections.map(([title, text], i) => (
-          <section className="case-section" key={title}>
-            <div className="case-section-label">
-              <span className="mono gold">
-                {String(i + 1).padStart(2, "0")}
-              </span>
-              <h2>{title}</h2>
-            </div>
-            <p>{text}</p>
-          </section>
-        ))}
-      </div>
-      <aside className="next-project wrap">
-        <Chapter number="NEXT">Keep exploring</Chapter>
-        <Link to={`/work/${next.slug}`}>
-          <span>{next.name}</span>
-          <span aria-hidden="true">↗</span>
-        </Link>
-      </aside>
+      <section className="case-readme wrap" aria-label="Project overview">
+        <div className="case-readme-file">
+          <div className="case-readme-header mono">
+            <svg
+              viewBox="0 0 16 16"
+              fill="none"
+              stroke="currentColor"
+              aria-hidden="true"
+            >
+              <path d="M4 1.5h5l3 3v10H4zM9 1.5v3h3M6 8h4M6 11h4" />
+            </svg>
+            README.md
+          </div>
+          <div className="case-readme-content">
+            <h2>In brief</h2>
+            <ul>
+              {project.summary.map((item) => (
+                <li key={item}>{item}</li>
+              ))}
+            </ul>
+            {project.note && <p className="case-readme-note">{project.note}</p>}
+          </div>
+        </div>
+      </section>
+      <section className="case-related wrap" aria-label="More projects">
+        <div className="case-related-heading">
+          <h2>More projects</h2>
+          <TextLink to="/work">View all work</TextLink>
+        </div>
+        <div className="home-project-grid case-project-grid">
+          {relatedProjects.map((item) => (
+            <ProjectItem
+              key={item.slug}
+              project={item}
+              index={projects.indexOf(item)}
+            />
+          ))}
+        </div>
+      </section>
     </article>
   );
 }

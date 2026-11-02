@@ -9,7 +9,8 @@ const links = [
   ["Work", "/work"],
   ["Writing", "/writing"],
   ["Photos", "/photos"],
-  ["Cycling", "/cycling"],
+  ["Strava", "/strava"],
+  ["Trophies", "/strava/trophies"],
   ["About", "/about"],
 ];
 
@@ -74,7 +75,7 @@ export default function SiteLayout({ children }) {
             <NavLink
               key={url}
               to={url}
-              end={url === "/"}
+              end={url === "/" || url === "/strava"}
               onClick={() => setOpen(false)}
             >
               {name}

@@ -4,6 +4,17 @@ const photoManifest = JSON.parse(
   readFileSync("src/content/photos.json", "utf8"),
 );
 
+// Test portfolio behavior independently of third-party uptime.
+// Real Strava rendering is reviewed separately with the supplied embeds.
+test.beforeEach(async ({ page }) => {
+  await page.route("https://strava-embeds.com/**", (route) =>
+    route.fulfill({
+      contentType: "text/html",
+      body: "<!doctype html><html lang='en'><title>Strava embed test fixture</title><body>Activity embed fixture</body></html>",
+    }),
+  );
+});
+
 const paths = [
   "/",
   "/work",
@@ -19,7 +30,7 @@ const paths = [
   "/writing",
   "/photos",
   "/about",
-  "/cycling",
+  "/strava",
   "/now",
 ];
 
@@ -243,6 +254,48 @@ test("new case studies use real media, correctly labeled links, and motion contr
   }
 });
 
+test("every project has a concise README and linked image previews of other projects", async ({
+  page,
+}) => {
+  const slugs = [
+    "bheeshma",
+    "arti-e",
+    "neuroasha",
+    "wafex",
+    "falconet",
+    "claudetrippy",
+    "drishtinet",
+    "semiconductor-insights",
+    "ridezilla",
+  ];
+  for (const slug of slugs) {
+    await page.goto(`/work/${slug}`);
+    await expect(page.locator(".case-readme-header")).toHaveText("README.md");
+    await expect(page.locator(".case-readme-content li")).toHaveCount(3);
+    await expect(page.locator(".case-section, .next-project")).toHaveCount(0);
+    await expect(page.getByText("Keep exploring", { exact: true })).toHaveCount(
+      0,
+    );
+    const previews = page.locator(".case-related .project-cover");
+    await expect(previews).toHaveCount(4);
+    const hrefs = await previews.evaluateAll((links) =>
+      links.map((link) => link.getAttribute("href")),
+    );
+    expect(new Set(hrefs).size).toBe(4);
+    expect(hrefs).not.toContain(`/work/${slug}`);
+    for (const href of hrefs) expect(slugs).toContain(href.split("/").at(-1));
+    await expect(
+      page
+        .locator(".case-related")
+        .getByRole("link", { name: "View all work", exact: true }),
+    ).toHaveAttribute("href", "/work");
+    await previews.first().click();
+    await expect(page).toHaveURL(new RegExp(`${hrefs[0]}$`));
+    await expect(page.locator("main")).toBeFocused();
+    await expect(page.locator(".case-readme-content li")).toHaveCount(3);
+  }
+});
+
 test("small phones and intermediate widths remain usable", async ({
   page,
 }, info) => {
@@ -256,7 +309,8 @@ test("small phones and intermediate widths remain usable", async ({
       "/",
       "/work",
       "/photos",
-      "/cycling",
+      "/strava",
+      "/strava/trophies",
       "/about",
       "/now",
       "/work/semiconductor-insights",
@@ -312,12 +366,10 @@ test("photo deep links, empty content, legacy routes and missing pages work", as
   await expect(page.getByRole("dialog")).toBeVisible();
   await page.getByRole("button", { name: "Close photograph viewer" }).click();
   await page.goto("/cycling");
-  await expect(page.getByText("NO ACTIVITIES PUBLISHED YET")).toBeVisible();
-  await expect(page.getByRole("heading", { level: 1 })).toHaveText(
-    "Cycling Journal",
-  );
+  await expect(page).toHaveURL(/\/strava$/);
+  await expect(page.getByRole("heading", { level: 1 })).toHaveText("Strava");
   await page.goto("/running");
-  await expect(page).toHaveURL(/\/cycling$/);
+  await expect(page).toHaveURL(/\/strava$/);
   await page.goto("/writing");
   await expect(page.locator(".writing-empty")).toBeVisible();
   await page.goto("/blog/photography");
@@ -379,7 +431,8 @@ test("pages have no serious or critical automated accessibility issues", async (
       "/work",
       "/photos",
       "/about",
-      "/cycling",
+      "/strava",
+      "/strava/trophies",
       "/writing",
     ]) {
       await page.goto(path, { waitUntil: "networkidle" });
@@ -438,4 +491,219 @@ test("theme selection persists and the 16:9 photography slider works", async ({
   await expect(page.locator("#lightbox-caption")).toHaveText(
     "Caption to come.",
   );
+});
+
+test("section dividers, Certificates, and the Strava profile use the supplied content", async ({
+  page,
+}) => {
+  await page.goto("/");
+  expect(
+    await page
+      .locator("#experience .experience-list > article")
+      .last()
+      .evaluate((el) => getComputedStyle(el).borderBottomWidth),
+  ).toBe("0px");
+  const titles = page.locator(".home-project-title");
+  expect(
+    await titles
+      .last()
+      .evaluate((el) => getComputedStyle(el).borderBottomWidth),
+  ).toBe("0px");
+  if (page.viewportSize().width > 760)
+    expect(
+      await titles
+        .nth(2)
+        .evaluate((el) => getComputedStyle(el).borderBottomWidth),
+    ).toBe("0px");
+  expect(
+    await page
+      .locator(".home-photography .chapter")
+      .evaluate((el) => getComputedStyle(el).borderTopWidth),
+  ).toBe("1px");
+  await page.goto("/about");
+  await expect(
+    page
+      .locator("#certificates")
+      .getByRole("heading", { name: /Certificates$/ }),
+  ).toBeVisible();
+  await expect(page.getByText("Learning, with a paper trail.")).toHaveCount(0);
+
+  await page.goto("/strava");
+  await expect(
+    page
+      .locator(".site-nav")
+      .getByRole("link", { name: "Strava", exact: true, includeHidden: true }),
+  ).toHaveAttribute("href", "/strava");
+  expect(await page.locator(".strava-totals dd").allTextContents()).toEqual([
+    "204",
+    "4,159.8 km",
+    "20,588 m",
+    "261h 18m",
+  ]);
+  expect(
+    await page.locator(".strava-bikes .text-link").allTextContents(),
+  ).toEqual(["bhairavi", "hemavati", "kali"]);
+  await expect(page.locator(".strava-records > div")).toHaveCount(3);
+  await expect(page.locator(".strava-effort-times > div")).toHaveCount(11);
+  expect(
+    await page.locator(".strava-effort-times dt").allTextContents(),
+  ).toEqual([
+    "5 mile",
+    "10K",
+    "10 mile",
+    "20K",
+    "30K",
+    "40K",
+    "50K",
+    "80K",
+    "50 mile",
+    "90K",
+    "100K",
+  ]);
+  await expect(page.locator(".strava-intro-photo img")).toHaveCount(1);
+  const gearRows = await page
+    .locator(".strava-bikes li")
+    .evaluateAll((items) =>
+      items.map((item) => Math.round(item.getBoundingClientRect().top)),
+    );
+  expect(new Set(gearRows).size).toBe(1);
+  expect(
+    await page
+      .locator(".strava-activities")
+      .evaluate(
+        (el) => getComputedStyle(el).gridTemplateColumns.split(" ").length,
+      ),
+  ).toBe(
+    page.viewportSize().width >= 1280
+      ? 4
+      : page.viewportSize().width > 760
+        ? 2
+        : 1,
+  );
+  await expect(
+    page.getByRole("link", { name: "View my trophy case on Strava" }),
+  ).toHaveAttribute("href", "https://www.strava.com/athletes/123068868");
+  await expect(page.locator(".strava-trophy-grid li")).toHaveCount(6);
+  await expect(page.locator(".strava-medal-photos")).toHaveCount(0);
+  await expect(
+    page.getByRole("link", { name: "Show more trophies" }),
+  ).toHaveAttribute("href", "/strava/trophies");
+  await expect(page.locator(".strava-trophy-grid a").first()).toHaveAttribute(
+    "href",
+    "https://www.strava.com/challenges/No-bad-weather-with-Weather-&-Radar-2026",
+  );
+  const ids = [
+    "19958146653",
+    "19553886327",
+    "18686832110",
+    "18260083376",
+    "18061270930",
+    "17553633686",
+    "17401184048",
+  ];
+  const sources = await page
+    .locator(".strava-activity iframe")
+    .evaluateAll((frames) => frames.map((frame) => frame.src));
+  expect(sources).toHaveLength(7);
+  for (let i = 0; i < ids.length; i++) {
+    const url = new URL(sources[i]);
+    expect(url.origin).toBe("https://strava-embeds.com");
+    expect(url.pathname).toBe(`/activity/${ids[i]}`);
+    expect(url.searchParams.get("token")).toBeTruthy();
+  }
+  await expect(page.locator(".strava-weekly")).toHaveCount(0);
+  await expect(
+    page.getByRole("heading", { name: "Weekly activity", exact: true }),
+  ).toHaveCount(0);
+  await expect(page.locator(".running-empty, .running-related")).toHaveCount(0);
+});
+
+test("Strava trophy preview opens its own page with the small photo before all badges", async ({
+  page,
+  request,
+}) => {
+  await page.goto("/strava");
+  const theme = await page.locator("html").getAttribute("data-theme");
+  await page
+    .getByRole("link", { name: "Show more trophies", exact: true })
+    .click();
+  await expect(page).toHaveURL(/\/strava\/trophies$/);
+  await expect(page.getByRole("heading", { level: 1 })).toHaveText(
+    "Trophy case",
+  );
+  await expect(page.locator("main")).toBeFocused();
+  await expect(page.locator("html")).toHaveAttribute("data-theme", theme);
+  await expect(
+    page
+      .getByRole("navigation", { name: "Main navigation", includeHidden: true })
+      .getByRole("link", {
+        name: "Trophies",
+        exact: true,
+        includeHidden: true,
+      }),
+  ).toHaveAttribute("aria-current", "page");
+  const mainNavigation = page.getByRole("navigation", {
+    name: "Main navigation",
+    includeHidden: true,
+  });
+  expect(await mainNavigation.locator("a").allTextContents()).toEqual([
+    "Home",
+    "Work",
+    "Writing",
+    "Photos",
+    "Strava",
+    "Trophies",
+    "About",
+  ]);
+  await expect(mainNavigation.locator('a[aria-current="page"]')).toHaveCount(1);
+  await expect(
+    page.getByRole("navigation", { name: "Strava sections" }),
+  ).toHaveCount(0);
+  await expect(page.locator(".strava-trophy-grid li")).toHaveCount(293);
+  const photos = page.locator(".strava-medal-photos img");
+  await expect(photos).toHaveCount(1);
+  for (const image of await photos.all()) {
+    await image.scrollIntoViewIfNeeded();
+    await image.evaluate((img) => img.decode());
+    const box = await image.boundingBox();
+    if (page.viewportSize().width <= 760) {
+      expect(box.width).toBeLessThanOrEqual(250);
+      const sourceRatio = await image.evaluate(
+        (img) => img.naturalWidth / img.naturalHeight,
+      );
+      expect(Math.abs(box.width / box.height - sourceRatio)).toBeLessThan(0.01);
+    } else {
+      expect(box.width).toBeLessThanOrEqual(320);
+      expect(box.height).toBe(200);
+      expect(
+        await image.evaluate((img) => getComputedStyle(img).objectFit),
+      ).toBe("cover");
+    }
+  }
+  expect(
+    await page
+      .locator(".strava-medal-photos")
+      .evaluate((el) =>
+        Boolean(
+          el.compareDocumentPosition(
+            document.querySelector(".strava-trophy-grid"),
+          ) & Node.DOCUMENT_POSITION_FOLLOWING,
+        ),
+      ),
+  ).toBe(true);
+  expect(
+    await page.evaluate(
+      () => document.documentElement.scrollWidth <= innerWidth + 1,
+    ),
+  ).toBe(true);
+  const html = await (await request.get("/strava/trophies")).text();
+  expect(html).toContain("<h1>Trophy case</h1>");
+  expect(html).toContain("/strava/trophies");
+  if (page.viewportSize().width <= 760)
+    await page.getByRole("button", { name: "Menu +", exact: true }).click();
+  await mainNavigation
+    .getByRole("link", { name: "Strava", exact: true })
+    .click();
+  await expect(page).toHaveURL(/\/strava$/);
+  await expect(page.locator(".strava-trophy-grid li")).toHaveCount(6);
 });
