@@ -53,6 +53,8 @@ test("all routes render, hydrate, load assets, and fit the viewport", async ({
     // Include below-fold, lazy-loaded images in the check.
     const images = page.locator("main img");
     for (const image of await images.all()) {
+      // Theme-specific alternatives are intentionally hidden by CSS.
+      if (!(await image.isVisible())) continue;
       await image.scrollIntoViewIfNeeded();
       await expect
         .poll(() =>
@@ -371,7 +373,12 @@ test("photo deep links, empty content, legacy routes and missing pages work", as
   await page.goto("/running");
   await expect(page).toHaveURL(/\/strava$/);
   await page.goto("/writing");
-  await expect(page.locator(".writing-empty")).toBeVisible();
+  await expect(page.locator(".writing-empty, .rss-link")).toHaveCount(0);
+  await expect(
+    page.getByRole("link", {
+      name: /Object detection in traffic using YOLOv11/,
+    }),
+  ).toBeVisible();
   await page.goto("/blog/photography");
   await expect(page).toHaveURL(/\/photos$/);
   await page.goto("/work/not-a-real-project");
@@ -397,7 +404,11 @@ test("navigation menu is keyboard usable and closes after navigation", async ({
   await page.goto("/");
   if (info.project.name === "mobile") {
     const menu = page.locator(".menu-toggle");
+    await expect(menu).toHaveAttribute("aria-label", "Open navigation");
+    await expect(menu).toHaveText("");
+    await expect(menu.locator("svg")).toBeVisible();
     await menu.click();
+    await expect(menu).toHaveAttribute("aria-label", "Close navigation");
     await expect(menu).toHaveAttribute("aria-expanded", "true");
     await page.keyboard.press("Escape");
     await expect(menu).toBeFocused();
@@ -410,10 +421,141 @@ test("navigation menu is keyboard usable and closes after navigation", async ({
   await expect(page).toHaveURL(/\/about$/);
   await expect(page.locator("main")).toBeFocused();
   if (info.project.name === "mobile")
-    await expect(page.getByRole("button", { name: "Menu +" })).toHaveAttribute(
-      "aria-expanded",
-      "false",
+    await expect(
+      page.getByRole("button", { name: "Open navigation" }),
+    ).toHaveAttribute("aria-expanded", "false");
+});
+
+test("Updates identifies the existing page and Strava shows light artwork or the dark photo cutout", async ({
+  page,
+}) => {
+  await page.goto("/");
+  await expect(page.locator(".now-link")).toHaveText("Updates");
+  await expect(page.locator(".now-link")).toHaveAttribute("href", "/now");
+  await page.locator(".now-link").click();
+  await expect(page.getByRole("heading", { level: 1 })).toHaveText("Updates");
+  await expect(page.locator(".now-updated time")).toHaveAttribute(
+    "datetime",
+    "2026-11-01",
+  );
+  for (const theme of ["dark", "light"]) {
+    await page.evaluate(
+      (value) => localStorage.setItem("portfolio-theme", value),
+      theme,
     );
+    await page.goto("/strava");
+    const portrait = page.locator(".strava-ink-portrait img:visible");
+    await expect(portrait).toHaveAttribute(
+      "src",
+      theme === "light"
+        ? "/strava/saagar-ink-portrait.png"
+        : "/strava/saagar-medal-cutout.webp",
+    );
+    await portrait.evaluate((img) => img.decode());
+    expect(await portrait.evaluate((img) => img.naturalWidth)).toBe(
+      theme === "light" ? 1199 : 1254,
+    );
+    await expect(portrait).toHaveAttribute(
+      "alt",
+      theme === "light"
+        ? /Ink-style illustration/
+        : /Background-removed photo cutout/,
+    );
+    const filter = await portrait.evaluate(
+      (img) => getComputedStyle(img).filter,
+    );
+    expect(filter).toBe("none");
+    expect(
+      await portrait.evaluate((img) => getComputedStyle(img).objectFit),
+    ).toBe("contain");
+    await expect(page.locator(".strava-ink-portrait img:visible")).toHaveCount(
+      1,
+    );
+    if (page.viewportSize().width <= 760) {
+      const box = await portrait.boundingBox();
+      expect(
+        Math.abs(box.x + box.width / 2 - page.viewportSize().width / 2),
+      ).toBeLessThan(1);
+    }
+    await page.locator(".theme-toggle").click();
+    await expect(
+      page.locator(".strava-ink-portrait img:visible"),
+    ).toHaveAttribute(
+      "src",
+      theme === "light"
+        ? "/strava/saagar-medal-cutout.webp"
+        : "/strava/saagar-ink-portrait.png",
+    );
+    await page.goto("/strava/trophies");
+    await expect(page.locator(".strava-medal-photos img")).toHaveAttribute(
+      "src",
+      /WhatsApp Image/,
+    );
+  }
+});
+
+test("About adds context and attributed recommendations without repeating Home", async ({
+  page,
+}) => {
+  await page.goto("/");
+  await expect(page.locator("#experience")).toBeVisible();
+  await expect(page.locator(".site-nav a[href='/writing']")).toHaveCount(0);
+  await page.goto("/about");
+  await expect(
+    page.locator(".about-opening, #experience, .skills-grid"),
+  ).toHaveCount(0);
+  await expect(
+    page.getByRole("heading", { name: "Useful data. Useful software." }),
+  ).toBeVisible();
+  await expect(page.locator(".about-applied")).toHaveCount(0);
+  await expect(
+    page.getByRole("heading", { name: "Tools, put to work" }),
+  ).toHaveCount(0);
+  await expect(
+    page.locator(".about-direction .about-skill-tags li"),
+  ).toHaveCount(21);
+  for (const skill of [
+    "SQL",
+    "DAX",
+    "R",
+    "Power Automate",
+    "Copilot Studio",
+    "AI agents",
+    "Cycling",
+  ]) {
+    await expect(
+      page
+        .locator(".about-skill-tags li")
+        .filter({ hasText: new RegExp(`^${skill}$`) }),
+    ).toBeVisible();
+  }
+  await expect(page.locator("#certificates li")).toHaveCount(3);
+  const quotes = page.locator(".recommendation");
+  await expect(quotes).toHaveCount(4);
+  for (const quote of await quotes.all()) {
+    await expect(quote.locator("figcaption a")).toHaveAttribute(
+      "href",
+      /^https:\/\/www\.linkedin\.com\/in\//,
+    );
+    await expect(quote.locator(".recommendation-context time")).toHaveAttribute(
+      "datetime",
+      /^\d{4}-\d{2}-\d{2}$/,
+    );
+    await expect(quote.locator(".recommendation-full")).not.toBeVisible();
+    await quote.locator("summary").focus();
+    await page.keyboard.press("Enter");
+    await expect(quote.locator(".recommendation-full")).toBeVisible();
+    await page.keyboard.press("Enter");
+    await expect(quote.locator(".recommendation-full")).not.toBeVisible();
+  }
+  await expect(quotes.first().locator("figcaption a")).toHaveText(
+    "Dr. Alka Munjal",
+  );
+  await expect(
+    page.getByRole("link", { name: "Read on LinkedIn" }),
+  ).toHaveAttribute("href", /details\/recommendations/);
+  await page.getByRole("link", { name: "My photographs", exact: true }).click();
+  await expect(page).toHaveURL(/\/photos$/);
 });
 
 test("pages have no serious or critical automated accessibility issues", async ({
@@ -454,6 +596,58 @@ test("pages have no serious or critical automated accessibility issues", async (
       ).toEqual([]);
     }
   }
+});
+
+test("new visitors follow their device theme until a manual choice is saved", async ({
+  page,
+}) => {
+  await page.emulateMedia({ colorScheme: "light" });
+  await page.goto("/");
+  await expect(page.locator("html")).toHaveAttribute("data-theme", "light");
+  await expect(page.locator('meta[name="theme-color"]')).toHaveAttribute(
+    "content",
+    "#ffffff",
+  );
+  await page.emulateMedia({ colorScheme: "dark" });
+  await expect(page.locator("html")).toHaveAttribute("data-theme", "dark");
+  await page.reload();
+  await expect(page.locator("html")).toHaveAttribute("data-theme", "dark");
+  await page
+    .getByRole("button", { name: "Switch to light theme", exact: true })
+    .click();
+  await page.emulateMedia({ colorScheme: "light" });
+  await page.emulateMedia({ colorScheme: "dark" });
+  await expect(page.locator("html")).toHaveAttribute("data-theme", "light");
+  await page.reload();
+  await expect(page.locator("html")).toHaveAttribute("data-theme", "light");
+});
+
+test("device theme works when browser storage is blocked", async ({ page }) => {
+  await page.addInitScript(() => {
+    Object.defineProperty(window, "localStorage", {
+      configurable: true,
+      get() {
+        throw new DOMException("Storage unavailable", "SecurityError");
+      },
+    });
+  });
+  await page.emulateMedia({ colorScheme: "light" });
+  await page.goto("/");
+  await expect(page.locator("html")).toHaveAttribute("data-theme", "light");
+  await page.emulateMedia({ colorScheme: "dark" });
+  await expect(page.locator("html")).toHaveAttribute("data-theme", "dark");
+  await page.reload();
+  await expect(page.locator("html")).toHaveAttribute("data-theme", "dark");
+  await page
+    .getByRole("button", { name: "Switch to light theme", exact: true })
+    .click();
+  await page.emulateMedia({ colorScheme: "light" });
+  await page.emulateMedia({ colorScheme: "dark" });
+  await expect(page.locator("html")).toHaveAttribute("data-theme", "light");
+  await expect(page.locator('meta[name="theme-color"]')).toHaveAttribute(
+    "content",
+    "#ffffff",
+  );
 });
 
 test("theme selection persists and the 16:9 photography slider works", async ({
@@ -534,39 +728,44 @@ test("section dividers, Certificates, and the Strava profile use the supplied co
       .locator(".site-nav")
       .getByRole("link", { name: "Strava", exact: true, includeHidden: true }),
   ).toHaveAttribute("href", "/strava");
-  expect(await page.locator(".strava-totals dd").allTextContents()).toEqual([
-    "204",
-    "4,159.8 km",
-    "20,588 m",
-    "261h 18m",
+  expect(
+    await page.locator(".strava-cycling-story strong").allTextContents(),
+  ).toEqual(["204 activities", "4,159.8 km", "20,588 m", "261h 18m"]);
+  expect(await page.locator(".strava-gear-story a").allTextContents()).toEqual([
+    "bhairavi",
+    "hemavati",
+    "kali",
   ]);
+  await expect(page.locator(".strava-cycling-story time")).toHaveAttribute(
+    "datetime",
+    "2026-11-02",
+  );
+  await expect(page.locator(".strava-longest-ride a")).toHaveText("109.9 km");
+  await expect(page.getByText("Biggest climb", { exact: true })).toHaveCount(0);
+  await expect(page.locator(".strava-records, .strava-totals")).toHaveCount(0);
+  await expect(page.locator(".strava-effort-times > li")).toHaveCount(11);
   expect(
-    await page.locator(".strava-bikes .text-link").allTextContents(),
-  ).toEqual(["bhairavi", "hemavati", "kali"]);
-  await expect(page.locator(".strava-records > div")).toHaveCount(3);
-  await expect(page.locator(".strava-effort-times > div")).toHaveCount(11);
-  expect(
-    await page.locator(".strava-effort-times dt").allTextContents(),
+    await page.locator(".strava-effort-times strong").allTextContents(),
   ).toEqual([
-    "5 mile",
-    "10K",
-    "10 mile",
-    "20K",
-    "30K",
-    "40K",
-    "50K",
-    "80K",
-    "50 mile",
-    "90K",
-    "100K",
+    "5 miles",
+    "10 km",
+    "10 miles",
+    "20 km",
+    "30 km",
+    "40 km",
+    "50 km",
+    "80 km",
+    "50 miles",
+    "90 km",
+    "100 km",
   ]);
-  await expect(page.locator(".strava-intro-photo img")).toHaveCount(1);
-  const gearRows = await page
-    .locator(".strava-bikes li")
-    .evaluateAll((items) =>
-      items.map((item) => Math.round(item.getBoundingClientRect().top)),
-    );
-  expect(new Set(gearRows).size).toBe(1);
+  await expect(page.locator(".strava-effort-times li").first()).toHaveText(
+    "I finished 5 miles in 10:50.",
+  );
+  await expect(page.locator(".strava-effort-times li").last()).toHaveText(
+    "I finished 100 km in 6:13:27.",
+  );
+  await expect(page.locator(".strava-intro-photo img:visible")).toHaveCount(1);
   expect(
     await page
       .locator(".strava-activities")
@@ -618,7 +817,7 @@ test("section dividers, Certificates, and the Strava profile use the supplied co
   await expect(page.locator(".running-empty, .running-related")).toHaveCount(0);
 });
 
-test("Strava trophy preview opens its own page with the small photo before all badges", async ({
+test("Strava trophy preview opens a responsive photo and expands all badges on request", async ({
   page,
   request,
 }) => {
@@ -649,7 +848,6 @@ test("Strava trophy preview opens its own page with the small photo before all b
   expect(await mainNavigation.locator("a").allTextContents()).toEqual([
     "Home",
     "Work",
-    "Writing",
     "Photos",
     "Strava",
     "Trophies",
@@ -659,26 +857,33 @@ test("Strava trophy preview opens its own page with the small photo before all b
   await expect(
     page.getByRole("navigation", { name: "Strava sections" }),
   ).toHaveCount(0);
+  await expect(page.locator(".strava-trophy-grid li")).toHaveCount(6);
+  const showMore = page.getByRole("button", { name: "Show more", exact: true });
+  await expect(showMore).toHaveAttribute("aria-expanded", "false");
+  await showMore.focus();
+  await page.keyboard.press("Enter");
   await expect(page.locator(".strava-trophy-grid li")).toHaveCount(293);
+  await expect(
+    page.getByText("Showing 293 of 293 badges", { exact: true }),
+  ).toBeVisible();
+  const showFewer = page.getByRole("button", {
+    name: "Show fewer",
+    exact: true,
+  });
+  await expect(showFewer).toHaveAttribute("aria-expanded", "true");
+  await showFewer.click();
+  await expect(page.locator(".strava-trophy-grid li")).toHaveCount(6);
   const photos = page.locator(".strava-medal-photos img");
   await expect(photos).toHaveCount(1);
   for (const image of await photos.all()) {
     await image.scrollIntoViewIfNeeded();
     await image.evaluate((img) => img.decode());
     const box = await image.boundingBox();
-    if (page.viewportSize().width <= 760) {
-      expect(box.width).toBeLessThanOrEqual(250);
-      const sourceRatio = await image.evaluate(
-        (img) => img.naturalWidth / img.naturalHeight,
-      );
-      expect(Math.abs(box.width / box.height - sourceRatio)).toBeLessThan(0.01);
-    } else {
-      expect(box.width).toBeLessThanOrEqual(320);
-      expect(box.height).toBe(200);
-      expect(
-        await image.evaluate((img) => getComputedStyle(img).objectFit),
-      ).toBe("cover");
-    }
+    expect(box.width).toBeLessThanOrEqual(340);
+    expect(Math.abs(box.width / box.height - 4 / 3)).toBeLessThan(0.01);
+    expect(await image.evaluate((img) => getComputedStyle(img).objectFit)).toBe(
+      "cover",
+    );
   }
   expect(
     await page
@@ -700,7 +905,9 @@ test("Strava trophy preview opens its own page with the small photo before all b
   expect(html).toContain("<h1>Trophy case</h1>");
   expect(html).toContain("/strava/trophies");
   if (page.viewportSize().width <= 760)
-    await page.getByRole("button", { name: "Menu +", exact: true }).click();
+    await page
+      .getByRole("button", { name: "Open navigation", exact: true })
+      .click();
   await mainNavigation
     .getByRole("link", { name: "Strava", exact: true })
     .click();

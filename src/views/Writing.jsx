@@ -18,13 +18,21 @@ export function Writing() {
         label="Writing & thinking"
         pageTitle="Writing"
         layout="writing"
-        description="A notebook for technical ideas, project reflections, poetry, and the things that don't fit anywhere else."
+        description={
+          articles.length > 0
+            ? "Notes on technical ideas, projects, and things worth thinking through."
+            : "A project note from my original journal, published on LinkedIn."
+        }
       >
-        <a className="rss-link mono" href="/rss.xml">
-          FOLLOW VIA RSS <span aria-hidden="true">↗</span>
-        </a>
+        {articles.length > 0 && (
+          <a className="rss-link mono" href="/rss.xml">
+            FOLLOW VIA RSS <span aria-hidden="true">↗</span>
+          </a>
+        )}
       </PageIntro>
-      <section className="writing-archive wrap">
+      <section
+        className={`writing-archive wrap ${articles.length === 0 ? "writing-archive-links-only" : ""}`}
+      >
         {articles.length > 0 ? (
           <>
             <div className="filter-bar" aria-label="Filter articles by tag">
@@ -60,29 +68,7 @@ export function Writing() {
               ))}
             </div>
           </>
-        ) : (
-          <div className="writing-empty">
-            <div className="notebook-mark" aria-hidden="true">
-              <span />
-              <span />
-              <span />
-              <span />
-            </div>
-            <div>
-              <span className="eyebrow gold">THE NOTEBOOK IS OPEN</span>
-              <h2>
-                Nothing published.
-                <br />
-                <em>Plenty to notice.</em>
-              </h2>
-              <p>
-                There aren’t any essays here yet. When there are, this will be
-                their home. For now, a couple of notes from the original journal
-                live on LinkedIn.
-              </p>
-            </div>
-          </div>
-        )}
+        ) : null}
         <div className="elsewhere">
           <Chapter number="↗">Notes elsewhere</Chapter>
           {writingLinks.map((note, i) => (

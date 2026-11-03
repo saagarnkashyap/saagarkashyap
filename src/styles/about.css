@@ -1,0 +1,213 @@
+.about-story {
+  display: grid;
+  grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr);
+  align-items: start;
+  gap: clamp(40px, 6vw, 90px);
+  padding-block: 6px 12px;
+}
+.about-story-prose > p,
+.about-direction > p,
+.about-section-intro > p {
+  font-size: 15px;
+  line-height: 1.85;
+  color: var(--muted);
+}
+.about-story-prose > p + p {
+  margin-top: 20px;
+}
+.about-story-prose > .about-lead {
+  color: var(--ivory);
+  font-size: clamp(22px, 2vw, 26px);
+  line-height: 1.5;
+  letter-spacing: -0.025em;
+  max-width: 38ch;
+}
+.about-story-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 28px;
+  margin-top: 22px;
+}
+.about-direction {
+  border-left: 1px solid var(--line);
+  padding-left: 30px;
+}
+.about-direction h2 {
+  font-size: clamp(23px, 2vw, 28px);
+  line-height: 1.3;
+  letter-spacing: -0.025em;
+  margin: 16px 0;
+}
+.about-direction .text-link {
+  display: flex;
+  width: fit-content;
+  max-width: 100%;
+  margin-top: 16px;
+}
+.about-page > .section {
+  padding-top: 56px;
+}
+.about-skill-groups {
+  display: grid;
+  gap: 18px;
+  margin-top: 24px;
+}
+.about-skill-groups h3 {
+  font-size: 13px;
+  font-weight: 550;
+  line-height: 1.6;
+  margin-bottom: 9px;
+}
+.about-skill-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.about-skill-tags li {
+  padding: 3px 9px;
+  border: 1px solid var(--line);
+  font-size: 12px;
+  line-height: 1.7;
+  color: var(--muted);
+}
+.about-contact-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 24px;
+  margin-top: 22px;
+}
+.about-contact-links .text-link {
+  margin-top: 0;
+}
+.about-section-intro {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px 30px;
+  padding-bottom: 24px;
+}
+.recommendation-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  column-gap: 64px;
+}
+.recommendation {
+  min-width: 0;
+  border-top: 1px solid var(--line);
+  padding-block: 28px;
+}
+.recommendation figure,
+.recommendation blockquote {
+  margin: 0;
+}
+.recommendation-excerpt {
+  font-size: clamp(19px, 1.6vw, 22px);
+  line-height: 1.6;
+  letter-spacing: -0.02em;
+}
+.recommendation figcaption {
+  margin-top: 24px;
+}
+.recommendation figcaption h3 {
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.5;
+}
+.recommendation figcaption a:hover {
+  color: var(--gold);
+}
+.recommendation figcaption p {
+  font-size: 13px;
+  line-height: 1.7;
+  color: var(--muted);
+  margin-top: 5px;
+}
+.recommendation figcaption .recommendation-context {
+  font-size: 12px;
+  margin-top: 10px;
+}
+.recommendation details {
+  margin-top: 22px;
+}
+.recommendation summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  font-size: 13px;
+  color: var(--gold);
+  padding-block: 8px;
+  cursor: pointer;
+  list-style: none;
+}
+.recommendation summary::-webkit-details-marker {
+  display: none;
+}
+.recommendation-toggle::before {
+  content: "+";
+  font-size: 20px;
+}
+.recommendation details[open] .recommendation-toggle::before {
+  content: "−";
+}
+.recommendation .recommendation-full {
+  margin-top: 14px;
+  padding-left: 18px;
+  border-left: 1px solid var(--line);
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.85;
+}
+.recommendation-full p + p {
+  margin-top: 16px;
+}
+.about-page .credentials li {
+  font-size: 14px;
+  line-height: 1.8;
+}
+.about-page .personal-note {
+  margin-top: 48px;
+}
+.about-page .personal-note p {
+  max-width: 24ch;
+  font-size: 28px;
+  line-height: 1.4;
+}
+.writing-archive-links-only .elsewhere {
+  margin-top: 8px;
+}
+@media (max-width: 760px) {
+  .about-story,
+  .recommendation-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .about-story {
+    gap: 32px;
+  }
+  .about-direction {
+    border-left: 0;
+    border-top: 1px solid var(--line);
+    padding: 24px 0 0;
+  }
+  .about-page > .section {
+    padding-top: 36px;
+  }
+  .about-story-prose > p,
+  .about-direction > p,
+  .about-section-intro > p {
+    font-size: 14px;
+  }
+  .about-story-prose > .about-lead {
+    font-size: 22px;
+  }
+  .recommendation-excerpt {
+    font-size: 19px;
+  }
+  .about-page .personal-note p {
+    font-size: 24px;
+  }
+}

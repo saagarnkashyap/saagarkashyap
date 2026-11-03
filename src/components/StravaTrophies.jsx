@@ -1,6 +1,6 @@
-export function TrophyGrid({ trophies }) {
+export function TrophyGrid({ trophies, id }) {
   return (
-    <ul className="strava-trophy-grid">
+    <ul className="strava-trophy-grid" id={id}>
       {trophies.map((trophy) => (
         <li key={trophy.id}>
           <a href={trophy.url} target="_blank" rel="noreferrer">

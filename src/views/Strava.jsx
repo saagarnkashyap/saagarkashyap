@@ -1,4 +1,4 @@
-import { Arrow, Chapter, PageIntro, TextLink } from "../components/Editorial";
+import { Chapter, PageIntro, TextLink } from "../components/Editorial";
 import StravaActivity from "../components/StravaActivity";
 import { TrophyGrid } from "../components/StravaTrophies";
 import {
@@ -9,9 +9,20 @@ import {
   stravaActivities,
   stravaProfile,
   stravaTrophies,
-  stravaMedalPhotos,
+  stravaPortrait,
+  stravaPhotoCutout,
 } from "../content/strava";
 import { formatDate } from "../lib/articles";
+
+const totals = Object.fromEntries(
+  allTimeStats.map(({ label, value, unit }) => [
+    label,
+    `${value}${unit ? ` ${unit}` : ""}`,
+  ]),
+);
+const longestRide = bestEfforts.find(
+  (effort) => effort.label === "Longest ride",
+);
 
 export default function Strava() {
   return (
@@ -22,12 +33,21 @@ export default function Strava() {
         layout="strava"
         description="Time outside, personal bests, and the bikes along the way."
       >
-        <figure className="strava-intro-photo">
+        <figure className="strava-intro-photo strava-ink-portrait">
           <img
-            src={stravaMedalPhotos[0].src}
-            alt={stravaMedalPhotos[0].alt}
-            width={stravaMedalPhotos[0].width}
-            height={stravaMedalPhotos[0].height}
+            className="strava-portrait-light"
+            src={stravaPortrait.src}
+            alt={stravaPortrait.alt}
+            width={stravaPortrait.width}
+            height={stravaPortrait.height}
+            decoding="async"
+          />
+          <img
+            className="strava-portrait-dark"
+            src={stravaPhotoCutout.src}
+            alt={stravaPhotoCutout.alt}
+            width={stravaPhotoCutout.width}
+            height={stravaPhotoCutout.height}
             decoding="async"
           />
         </figure>
@@ -40,82 +60,87 @@ export default function Strava() {
           <Chapter number="01" heading>
             All-time cycling
           </Chapter>
-          <p className="strava-snapshot mono">
-            TOTALS AS OF{" "}
+          <p className="strava-cycling-story">
+            As of{" "}
             <time dateTime={stravaProfile.updated}>
               {formatDate(stravaProfile.updated)}
             </time>
+            , I’ve logged <strong>{totals.Activities} activities</strong>,
+            covered <strong>{totals.Distance}</strong>, and climbed{" "}
+            <strong>{totals["Elevation gain"]}</strong>. That’s{" "}
+            <strong>{totals.Time}</strong> spent on my bike.
           </p>
-          <dl className="strava-totals">
-            {allTimeStats.map((stat) => (
-              <div key={stat.label}>
-                <dt>{stat.label}</dt>
-                <dd>
-                  {stat.value}
-                  {stat.unit && <span> {stat.unit}</span>}
-                </dd>
-              </div>
-            ))}
-          </dl>
+          <p className="strava-cycling-story strava-longest-ride">
+            My longest ride so far is{" "}
+            <a
+              className="strava-inline-link"
+              href={`https://www.strava.com/activities/${longestRide.activity}/best-efforts`}
+              target="_blank"
+              rel="noreferrer"
+            >
+              {longestRide.value}
+            </a>
+            .
+          </p>
         </section>
         <section className="strava-gear" aria-label="Cycling gear">
           <Chapter number="02" heading>
             Gear
           </Chapter>
-          <ul className="strava-bikes">
-            {bikes.map((bike) => (
-              <li key={bike.name}>
-                <TextLink to={bike.url} external>
+          <p className="strava-gear-story">
+            These are my bikes:{" "}
+            {bikes.map((bike, index) => (
+              <span key={bike.name}>
+                {index > 0 && (index === bikes.length - 1 ? ", and " : ", ")}
+                <a
+                  className="strava-inline-link"
+                  href={bike.url}
+                  target="_blank"
+                  rel="noreferrer"
+                >
                   {bike.name}
-                </TextLink>
-                <span>{bike.distance}</span>
-              </li>
+                </a>{" "}
+                ({bike.distance})
+              </span>
             ))}
-          </ul>
+            .
+          </p>
         </section>
         <section
           className="strava-best-efforts"
           aria-label="Cycling best efforts"
         >
           <Chapter number="03" heading>
-            Best efforts
+            Personal bests
           </Chapter>
-          <dl className="strava-records">
-            {bestEfforts.map((effort) => (
-              <div key={effort.label}>
-                <dt>{effort.label}</dt>
-                <dd>
-                  <TextLink
-                    to={`https://www.strava.com/activities/${effort.activity}/best-efforts`}
-                    external
-                  >
-                    {effort.value}
-                  </TextLink>
-                </dd>
-              </div>
-            ))}
-          </dl>
-          <dl
+          <p className="strava-embed-note">
+            My quickest recorded cycling efforts, by distance.
+          </p>
+          <ul
             className="strava-effort-times"
             aria-label="Best cycling times by distance"
           >
             {bestEffortTimes.map((effort) => (
-              <div key={effort.label}>
-                <dt>{effort.label}</dt>
-                <dd>
-                  <a
-                    href={`https://www.strava.com/activities/${effort.activity}/best-efforts`}
-                    target="_blank"
-                    rel="noreferrer"
-                    aria-label={`${effort.label} best time: ${effort.value}, view on Strava`}
-                  >
-                    <span>{effort.value}</span>
-                    <Arrow diagonal />
-                  </a>
-                </dd>
-              </div>
+              <li key={effort.label}>
+                I finished{" "}
+                <strong>
+                  {effort.label.endsWith(" mile")
+                    ? `${effort.label}s`
+                    : effort.label.replace("K", " km")}
+                </strong>{" "}
+                in{" "}
+                <a
+                  href={`https://www.strava.com/activities/${effort.activity}/best-efforts`}
+                  target="_blank"
+                  rel="noreferrer"
+                  aria-label={`${effort.label} best time: ${effort.value}, view on Strava`}
+                >
+                  {effort.value}
+                </a>
+                .
+              </li>
             ))}
-          </dl>
+          </ul>
         </section>
         <section
           className="strava-trophy-section"

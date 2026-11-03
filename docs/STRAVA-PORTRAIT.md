@@ -1,0 +1,20 @@
+# Strava ink portrait
+
+Created with the built-in imagegen tool in edit mode on 4 November 2026.
+
+- Website asset: `public/strava/saagar-ink-portrait.png` (1199 × 1312, RGBA, genuine transparent alpha).
+- Dark-theme companion: `public/strava/saagar-ink-portrait-dark.png` (1199 × 1312, RGBA, genuine transparent alpha), created with the built-in imagegen edit tool from the approved artwork and original photo.
+- Source: `public/strava/WhatsApp Image 2026-11-02 at 1.12.05 PM (1).jpeg`, retained unchanged and still used on Trophies.
+- Scope: Strava introduction only. Light mode retains the approved ink illustration. Dark mode now reuses the exact favicon photo cutout as `public/strava/saagar-medal-cutout.webp` (1254 by 1254, lossless WebP with original visible pixels and alpha preserved). Both use contain sizing, no image filters, and the existing centered mobile container. The head and medal remain visible in full. Trophies still uses the original event photograph. The cutout source and imagegen prompt are documented in FAVICON.md; no new image generation was needed.
+
+## Original light-theme prompt
+
+Use case: style-transfer. Edit target: the supplied photograph of Saagar wearing sunglasses and a finisher medal, standing with both hands behind his back. Asset type: a small editorial ink portrait for his personal portfolio's Strava introduction. Transform ONLY the foreground person into a restrained silhouette-like black ink drawing: confident charcoal-black shapes, a few delicate hand-drawn contour lines, and transparent negative-space highlights. Preserve his recognizable face proportions, tousled short hair, sunglasses, shirt, sleeves, backpack straps, medal ribbon and medal, exact relaxed arms-behind-back pose, and the waist-level crop from the photograph. Keep enough facial contour to remain recognizable, not an anonymous solid blob. Center the subject with modest breathing room. Remove the entire event background, all other people, signage and scenery; output genuinely transparent alpha around and within the negative spaces of the ink study. Monochrome black ink only; no gray/white/colored background, no paper rectangle, no gold, no new objects, no invented limbs below the source crop, no text, no labels, no border, no glow, no shadow, no gradients. An understated independent-publication illustration, not a cartoon, comic-book superhero, or detailed pencil rendering.
+
+## Dark-theme companion prompt
+
+Use case: style-transfer, dark-theme adaptation. Image 1 is the approved light-theme ink illustration and is the edit target. Image 2 is the original photograph and is only an identity/lighting reference. Preserve the approved illustration's person, face proportions, hairstyle, sunglasses, shirt, backpack straps, medal ribbon and medal, hands-behind-back pose, waist crop, subject scale and centered composition. Make a companion drawing specifically readable over a near-black #101113 website background. CRITICAL: natural positive lighting, NOT an inverted or negative image. Keep the hair and sunglasses charcoal-black; the face and neck should have soft warm-ivory filled highlights on the naturally lit planes and dark ink features, so he looks like the same person as in the approved light version. Keep the shirt mostly dark charcoal with restrained ivory seams and contours, not a solid white shirt. A few fine ivory edge strokes separate dark hair and shoulders from the near-black background. Use flat hand-drawn ink shapes and sparse fine strokes; match the approved editorial silhouette style. Do not make a glowing outline, white hair, black hollow face, ghost, skull, exaggerated beard, superhero or new costume. Two pigments only, deep charcoal and warm ivory. Keep a genuinely transparent alpha background with no rectangular paper, scenery, frame, shadow, glow, text or added objects. Preserve the same aspect ratio and modest transparent margins, with the subject centered, for a small portfolio portrait.
+
+The original light artwork remains byte-for-byte unchanged (SHA-256 `672cd5beea78f96a608b10d376c5406a20df962a04f89ef45d290d7faed3d307`).
+
+

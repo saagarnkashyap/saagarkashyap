@@ -15,6 +15,23 @@ export const stravaProfile = {
   updated: "2026-11-02",
 };
 
+// An ink-style illustration generated from the retained medal photograph.
+// Kept separate so the Trophies page continues to use the original image.
+export const stravaPortrait = {
+  src: "/strava/saagar-ink-portrait.png",
+  width: 1199,
+  height: 1312,
+  alt: "Ink-style illustration of Saagar wearing sunglasses and a finisher medal, based on his photograph.",
+};
+
+// The same photographic cutout used for the favicon, exported losslessly.
+export const stravaPhotoCutout = {
+  src: "/strava/saagar-medal-cutout.webp",
+  width: 1254,
+  height: 1254,
+  alt: "Background-removed photo cutout of Saagar wearing sunglasses and his finisher medal.",
+};
+
 export const allTimeStats = [
   { label: "Activities", value: "204" },
   { label: "Distance", value: "4,159.8", unit: "km" },

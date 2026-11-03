@@ -83,11 +83,13 @@ try {
   await page.goto("http://127.0.0.1:4173/writing", {
     waitUntil: "networkidle",
   });
+  assert.equal(await page.locator('.site-nav a[href="/writing"]').count(), 1);
+  assert.equal(await page.locator('.rss-link[href="/rss.xml"]').count(), 1);
   await page.getByRole("button", { name: "Verification", exact: true }).click();
   assert.equal(await page.locator(".article-list article").count(), 1);
   assert.deepEqual(errors, []);
   console.log(
-    "Verified article HTML, highlighting, dates, tags, TOC, RSS, sitemap, mobile rendering, and draft exclusion.",
+    "Verified article HTML, highlighting, dates, tags, TOC, RSS, sitemap, mobile rendering, draft exclusion, and Writing/RSS returning for published content.",
   );
 } finally {
   await browser?.close();

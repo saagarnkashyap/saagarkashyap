@@ -1,17 +1,39 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+
+function applyTheme(theme) {
+  document.documentElement.dataset.theme = theme;
+  document
+    .querySelector('meta[name="theme-color"]')
+    ?.setAttribute("content", theme === "light" ? "#ffffff" : "#101113");
+}
 
 export default function ThemeToggle() {
   const [theme, setTheme] = useState("dark");
+  const manuallySelected = useRef(false);
   useEffect(() => {
-    setTheme(document.documentElement.dataset.theme || "dark");
+    setTheme(document.documentElement.dataset.theme || "light");
+    if (!window.matchMedia) return;
+    const preference = window.matchMedia("(prefers-color-scheme: dark)");
+    const followDevice = (event) => {
+      if (manuallySelected.current) return;
+      try {
+        const saved = localStorage.getItem("portfolio-theme");
+        if (saved === "light" || saved === "dark") return;
+      } catch {
+        /* A manual choice still wins for this visit without storage. */
+      }
+      const next = event.matches ? "dark" : "light";
+      applyTheme(next);
+      setTheme(next);
+    };
+    preference.addEventListener("change", followDevice);
+    return () => preference.removeEventListener("change", followDevice);
   }, []);
 
   function toggleTheme() {
     const next = theme === "dark" ? "light" : "dark";
-    document.documentElement.dataset.theme = next;
-    document
-      .querySelector('meta[name="theme-color"]')
-      ?.setAttribute("content", next === "light" ? "#ffffff" : "#101113");
+    manuallySelected.current = true;
+    applyTheme(next);
     try {
       localStorage.setItem("portfolio-theme", next);
     } catch {

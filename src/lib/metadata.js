@@ -13,7 +13,7 @@ const pages = {
   ],
   "/writing": [
     "Writing & thinking",
-    "Technical notes, project reflections, and a personal journal by Saagar Kashyap.",
+    "Writing and project notes by Saagar Kashyap, including a LinkedIn note on traffic object detection with YOLOv11.",
   ],
   "/photos": [
     "The art of paying attention",
@@ -29,10 +29,10 @@ const pages = {
   ],
   "/about": [
     "A little about Saagar",
-    "Data, planning systems, photography, poetry, and the person behind the projects.",
+    "Saagar Kashyap’s path into data and software, tools in practice, recommendations from teachers and mentors, and opportunities to build useful things.",
   ],
   "/now": [
-    "A little about right now",
+    "Updates",
     "What is occupying Saagar Kashyap: work, projects, and interests beyond the screen.",
   ],
 };

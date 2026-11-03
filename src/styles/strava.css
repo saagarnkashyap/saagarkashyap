@@ -47,109 +47,6 @@
   margin-top: 8px;
   line-height: 1.6;
 }
-.strava-totals,
-.strava-records {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 24px;
-  margin: 28px 0 48px;
-}
-.strava-totals dt,
-.strava-records dt {
-  font-size: 14px;
-  color: var(--muted);
-  margin-bottom: 12px;
-}
-.strava-totals dd {
-  font-size: clamp(26px, 2.5vw, 36px);
-  font-weight: 550;
-  letter-spacing: -0.04em;
-  line-height: 1.25;
-  margin: 0;
-  font-variant-numeric: tabular-nums;
-}
-.strava-totals dd > span {
-  margin-left: 0.2em;
-  font-size: 16px;
-  font-weight: 400;
-  letter-spacing: 0;
-}
-.strava-gear {
-  margin-bottom: 48px;
-}
-.strava-bikes {
-  list-style: none;
-  padding: 0;
-  margin: 24px 0 0;
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 24px;
-}
-.strava-bikes li {
-  min-width: 0;
-}
-.strava-bikes .text-link {
-  font-size: 22px;
-  gap: 15px;
-  border: 0;
-  padding: 0;
-}
-.strava-bikes li > span {
-  display: block;
-  margin-top: 12px;
-  font-size: 14px;
-  font-variant-numeric: tabular-nums;
-}
-.strava-records {
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  margin-bottom: 32px;
-}
-.strava-records dd {
-  margin: 0;
-}
-.strava-records .text-link {
-  font-size: clamp(22px, 2.3vw, 32px);
-  gap: 16px;
-  letter-spacing: -0.04em;
-  padding: 0;
-  border: 0;
-  max-width: 100%;
-}
-.strava-effort-times {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(95px, 1fr));
-  gap: 24px 12px;
-  border-block: 1px solid var(--line);
-  padding: 20px 0;
-  margin: 24px 0 0;
-}
-.strava-effort-times > div {
-  min-width: 0;
-}
-.strava-effort-times dt {
-  font-size: 13px;
-  line-height: 1.5;
-  color: var(--muted);
-  margin-bottom: 10px;
-}
-.strava-effort-times dd {
-  margin: 0;
-}
-.strava-effort-times a {
-  display: inline-flex;
-  align-items: center;
-  gap: 7px;
-  font-size: 18px;
-  font-variant-numeric: tabular-nums;
-}
-.strava-effort-times a:hover {
-  color: var(--gold);
-}
-.strava-effort-times .arrow {
-  width: 12px;
-  height: 12px;
-  flex-shrink: 0;
-}
 .strava-trophies {
   display: flex;
   justify-content: space-between;
@@ -277,49 +174,9 @@
     max-width: 320px;
     margin-top: 22px;
   }
-  .strava-totals {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 28px 16px;
-  }
   .strava-activities {
     grid-template-columns: minmax(0, 1fr);
     gap: 32px;
-  }
-  .strava-records {
-    gap: 12px;
-  }
-  .strava-records dt {
-    font-size: 12px;
-    line-height: 1.5;
-  }
-  .strava-records .text-link {
-    font-size: 18px;
-    gap: 6px;
-  }
-  .strava-records .arrow {
-    width: 12px;
-    flex-shrink: 0;
-  }
-  .strava-bikes {
-    gap: 12px;
-    margin-top: 16px;
-  }
-  .strava-bikes .text-link {
-    font-size: 16px;
-    gap: 6px;
-  }
-  .strava-bikes .arrow {
-    width: 12px;
-    flex-shrink: 0;
-  }
-  .strava-bikes li > span {
-    font-size: 12px;
-  }
-  .strava-effort-times {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-  }
-  .strava-effort-times a {
-    font-size: 16px;
   }
   .strava-trophies {
     flex-direction: column;
@@ -331,7 +188,121 @@
   }
 }
 
-/* Desktop photographs form part of each introduction; mobile stays uncropped. */
+/* Cycling records read as a journal rather than a dashboard. */
+.strava-cycling-story,
+.strava-gear-story {
+  max-width: 76ch;
+  color: var(--muted);
+  font-size: clamp(17px, 1.6vw, 21px);
+  line-height: 1.9;
+  margin: 6px 0 0;
+}
+.strava-cycling-story strong {
+  color: var(--ivory);
+  font-weight: 550;
+  white-space: nowrap;
+}
+.strava-longest-ride {
+  margin-top: 16px;
+}
+.strava-page > section {
+  margin-bottom: 40px;
+}
+.strava-inline-link,
+.strava-effort-times a {
+  color: var(--ivory);
+  text-decoration: underline;
+  text-decoration-color: var(--gold);
+  text-underline-offset: 5px;
+  text-decoration-thickness: 1px;
+}
+.strava-inline-link:hover,
+.strava-effort-times a:hover {
+  color: var(--gold);
+}
+.strava-effort-times {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px 36px;
+  list-style: none;
+  padding: 0;
+  margin: 20px 0 0;
+  font-size: 16px;
+  line-height: 1.9;
+  color: var(--muted);
+}
+.strava-effort-times strong {
+  color: var(--ivory);
+  font-weight: 500;
+}
+/* The trophy portrait belongs to the header on every screen size. */
+.page-intro-trophies {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(260px, 340px);
+  column-gap: 64px;
+  grid-template-rows: 1fr auto 1fr;
+  align-items: start;
+}
+.page-intro-trophies .page-intro-heading,
+.page-intro-trophies .page-intro-actions {
+  display: contents;
+}
+.page-intro-trophies .page-title-row {
+  grid-column: 1;
+  grid-row: 1;
+  align-self: end;
+}
+.page-intro-trophies .page-intro-copy {
+  grid-column: 1;
+  grid-row: 2;
+  margin: 14px 0 0 35px;
+}
+.page-intro-trophies .page-intro-actions > .text-link {
+  grid-column: 1;
+  grid-row: 3;
+  justify-self: start;
+  margin: 18px 0 0 35px;
+  max-width: 100%;
+}
+.page-intro-trophies .strava-medal-moments {
+  grid-column: 2;
+  grid-row: 1 / span 3;
+  align-self: center;
+  width: 100%;
+  margin: 0;
+}
+.page-intro-trophies .strava-medal-photos {
+  display: block;
+  max-width: none;
+}
+.page-intro-trophies .strava-medal-photos img {
+  width: 100%;
+  max-width: none;
+  height: auto;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  object-position: 80% center;
+}
+.trophy-collection-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px 24px;
+  margin-top: 20px;
+}
+.trophy-collection-controls > p {
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.7;
+}
+.trophy-collection-controls .text-link {
+  min-height: 44px;
+}
+.trophy-layout .strava-trophy-grid a {
+  align-items: center;
+  text-align: center;
+}
 @media (min-width: 761px) {
   .page-intro-strava {
     grid-template-columns: minmax(0, 1fr) clamp(280px, 32vw, 420px);
@@ -359,53 +330,67 @@
     align-self: start;
     margin: 18px 0 0 35px;
   }
-  .trophy-layout {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(240px, 320px);
-    column-gap: 64px;
-    align-items: center;
-    width: calc(100% - 160px);
-    max-width: 1280px;
-    margin-inline: auto;
-  }
-  .trophy-layout > .page-intro {
-    grid-column: 1;
-    grid-row: 1;
-    width: 100%;
-    min-width: 0;
-    padding: 36px 0 30px;
-  }
-  .trophy-layout .page-intro-heading {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 20px;
-  }
-  .trophy-layout > .strava-page {
-    display: contents;
-  }
-  .trophy-layout .strava-medal-moments {
-    grid-column: 2;
-    grid-row: 1;
-    width: 100%;
-    margin: 36px 0 30px;
-  }
-  .trophy-layout .strava-medal-photos {
-    display: block;
-    max-width: none;
-  }
-  .trophy-layout .strava-medal-photos img {
-    max-width: none;
-    height: 200px;
-    object-fit: cover;
-    object-position: 80% center;
-  }
-  .trophy-layout .strava-page > section {
-    grid-column: 1 / -1;
-    padding-bottom: 80px;
-  }
 }
 @media (min-width: 761px) and (max-width: 1100px) {
-  .trophy-layout {
-    width: calc(100% - 72px);
+  .page-intro-trophies {
+    column-gap: 36px;
+    grid-template-columns: minmax(0, 1fr) minmax(220px, 280px);
+  }
+  .strava-trophy-grid,
+  .strava-effort-times {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+@media (max-width: 760px) {
+  .page-intro-trophies {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: auto;
+    row-gap: 0;
+  }
+  .page-intro-trophies .page-intro-copy {
+    margin: 14px 0 0;
+  }
+  .page-intro-trophies .page-intro-actions > .text-link {
+    margin: 12px 0 24px;
+  }
+  .page-intro-trophies .strava-medal-moments {
+    grid-column: 1;
+    grid-row: 4;
+    max-width: 340px;
+    margin-inline: auto;
+  }
+  .strava-cycling-story,
+  .strava-gear-story {
+    font-size: 17px;
+    line-height: 1.9;
+  }
+  .strava-effort-times {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 12px;
+    font-size: 15px;
+  }
+}
+
+/* Light mode uses ink artwork; dark mode uses the favicon's photo cutout. */
+.page-intro-strava .strava-ink-portrait img {
+  height: 300px;
+  object-fit: contain;
+  object-position: center;
+}
+.page-intro-strava .strava-portrait-light {
+  display: none;
+}
+[data-theme="light"] .page-intro-strava .strava-portrait-light {
+  display: block;
+}
+[data-theme="light"] .page-intro-strava .strava-portrait-dark {
+  display: none;
+}
+@media (max-width: 760px) {
+  .page-intro-strava .page-intro-actions {
+    max-width: none;
+  }
+  .page-intro-strava .strava-ink-portrait img {
+    height: 250px;
   }
 }

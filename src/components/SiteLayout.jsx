@@ -1,13 +1,14 @@
 import { useEffect, useRef, useState } from "react";
 import { Link, NavLink, useLocation } from "react-router-dom";
 import { profile } from "../content/profile";
+import { articles } from "../lib/articles";
 import { Arrow } from "./Editorial";
 import ThemeToggle from "./ThemeToggle";
 
 const links = [
   ["Home", "/"],
   ["Work", "/work"],
-  ["Writing", "/writing"],
+  ...(articles.length > 0 ? [["Writing", "/writing"]] : []),
   ["Photos", "/photos"],
   ["Strava", "/strava"],
   ["Trophies", "/strava/trophies"],
@@ -60,11 +61,25 @@ export default function SiteLayout({ children }) {
         <button
           ref={menuButton}
           className="menu-toggle"
+          aria-label={open ? "Close navigation" : "Open navigation"}
           aria-expanded={open}
           aria-controls="site-nav"
           onClick={() => setOpen(!open)}
         >
-          {open ? "Close −" : "Menu +"}
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1.8"
+            strokeLinecap="round"
+            aria-hidden="true"
+          >
+            {open ? (
+              <path d="m6 6 12 12M6 18 18 6" />
+            ) : (
+              <path d="M4 6h16M4 12h16M4 18h16" />
+            )}
+          </svg>
         </button>
         <nav
           id="site-nav"
@@ -83,9 +98,12 @@ export default function SiteLayout({ children }) {
             </NavLink>
           ))}
         </nav>
-        <NavLink className="now-link" to="/now">
-          <span className="status-dot" />
-          Now
+        <NavLink
+          className="now-link"
+          to="/now"
+          title="Updates on work, projects, and life"
+        >
+          Updates
           <Arrow diagonal />
         </NavLink>
         <ThemeToggle />
@@ -131,7 +149,7 @@ export default function SiteLayout({ children }) {
           <span>© {new Date().getUTCFullYear()} SAAGAR KASHYAP</span>
           <span>A PERSONAL CORNER OF THE INTERNET.</span>
           <Link to="/now">
-            A LITTLE ABOUT NOW <Arrow diagonal />
+            WORK & LIFE UPDATES <Arrow diagonal />
           </Link>
         </div>
       </footer>

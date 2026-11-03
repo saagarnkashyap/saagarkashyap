@@ -1,4 +1,5 @@
-import { Chapter, PageIntro, TextLink } from "../components/Editorial";
+import { useState } from "react";
+import { Arrow, Chapter, PageIntro, TextLink } from "../components/Editorial";
 import { TrophyGrid } from "../components/StravaTrophies";
 import {
   stravaMedalPhotos,
@@ -8,14 +9,21 @@ import {
 import { formatDate } from "../lib/articles";
 
 export default function StravaTrophies() {
+  const [expanded, setExpanded] = useState(false);
+  const visibleTrophies = expanded
+    ? stravaTrophies
+    : stravaTrophies.slice(0, 6);
   return (
     <div className="trophy-layout">
-      <PageIntro number="04" label="Trophy case" layout="logbook">
+      <PageIntro
+        number="04"
+        label="Trophy case"
+        layout="trophies"
+        description="A few finishes, and the challenges collected along the way."
+      >
         <TextLink to={stravaProfile.url} external>
           My Strava profile
         </TextLink>
-      </PageIntro>
-      <div className="strava-page wrap">
         <figure className="strava-medal-moments">
           <div className="strava-medal-photos">
             {stravaMedalPhotos.map((photo) => (
@@ -31,6 +39,8 @@ export default function StravaTrophies() {
           </div>
           <figcaption>After the finish.</figcaption>
         </figure>
+      </PageIntro>
+      <div className="strava-page wrap">
         <section aria-label="All Strava trophies">
           <Chapter number="01" heading>
             Challenge badges
@@ -41,7 +51,21 @@ export default function StravaTrophies() {
               {formatDate(stravaProfile.updated)}
             </time>
           </p>
-          <TrophyGrid trophies={stravaTrophies} />
+          <div className="trophy-collection-controls">
+            <p aria-live="polite">
+              Showing {visibleTrophies.length} of {stravaTrophies.length} badges
+            </p>
+            <button
+              className="text-link"
+              aria-expanded={expanded}
+              aria-controls="challenge-badges"
+              onClick={() => setExpanded(!expanded)}
+            >
+              {expanded ? "Show fewer" : "Show more"}
+              <Arrow />
+            </button>
+          </div>
+          <TrophyGrid id="challenge-badges" trophies={visibleTrophies} />
           <TextLink to="/strava">Back to Strava</TextLink>
         </section>
       </div>

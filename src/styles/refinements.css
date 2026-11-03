@@ -493,6 +493,61 @@ h2 em,
 .now-link {
   gap: 8px;
 }
+.menu-toggle svg {
+  display: block;
+  width: 22px;
+  height: 22px;
+}
+@media (max-width: 760px) {
+  .menu-toggle {
+    order: 2;
+    margin-left: 0;
+    display: grid;
+    place-items: center;
+    width: 44px;
+    min-width: 44px;
+    height: 44px;
+    padding: 0;
+    flex-shrink: 0;
+  }
+  .site-header .now-link {
+    order: 1;
+    margin-left: 0;
+    flex: 1;
+    min-width: 0;
+    min-height: 44px;
+    justify-content: center;
+    gap: 4px;
+  }
+  .site-header .now-link .arrow {
+    display: block;
+    width: 12px;
+    height: 12px;
+    margin-left: 0;
+  }
+  .site-header .theme-toggle {
+    order: 3;
+  }
+  .site-header .site-nav {
+    order: 4;
+  }
+}
+@media (max-width: 380px) {
+  .site-header.wrap {
+    gap: 4px;
+  }
+  .site-header .wordmark {
+    font-size: 17px;
+  }
+  .site-header .now-link {
+    font-size: 12px;
+    gap: 3px;
+  }
+  .site-header .now-link .arrow {
+    width: 10px;
+    height: 10px;
+  }
+}
 .page-title-row {
   display: flex;
   align-items: baseline;
